@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+/** Jost font configuration */
+@font-face {
+  font-family: jost;
+  src: url("../public/assets/fonts/Jost-VariableFont_wght.ttf") format("woff2");
+}
+
+@theme {
+  --font-jost: jost, verdana;
+}
+
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "aeris";
+  default: true;
+  prefersdark: true;
+  color-scheme: "light";
+  --color-base-100: oklch(98% 0.002 247.839);
+  --color-base-200: oklch(96% 0.003 264.542);
+  --color-base-300: oklch(92% 0.006 264.531);
+  --color-base-content: oklch(0.3351 0.0331 260.91);
+  --color-primary: oklch(0.8157 0.1211 212.77);
+  --color-primary-content: oklch(0.3351 0.0331 260.91);
+  --color-secondary: oklch(0.8643 0.1109 211.35);
+  --color-secondary-content: oklch(0.5956 0.0381 257.87);
+  --color-accent: oklch(0.9149 0.0744 210.83);
+  --color-accent-content: oklch(0.3351 0.0331 260.91);
+  --color-neutral: oklch(0.8647 0.1247 81.37);
+  --color-neutral-content: oklch(0.3351 0.0331 260.91);
+  --color-info: oklch(0.6245 0.1637 271.85);
+  --color-info-content: oklch(96% 0.015 12.422);
+  --color-success: oklch(72% 0.219 149.579);
+  --color-success-content: oklch(96% 0.015 12.422);
+  --color-warning: oklch(70% 0.213 47.604);
+  --color-warning-content: oklch(96% 0.015 12.422);
+  --color-error: oklch(64% 0.246 16.439);
+  --color-error-content: oklch(96% 0.015 12.422);
+  --radius-selector: 2rem;
+  --radius-field: 2rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
