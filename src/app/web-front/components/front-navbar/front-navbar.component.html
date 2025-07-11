@@ -1,12 +1,14 @@
 <header class="w-full h-fit bg-primary py-4 font-jost font-semibold">
-  <nav class="w-fit flex flex-row gap-4 items-center justify-center mx-auto">
-    <a href="">
+  <nav
+    class="hidden md:w-180 lg:w-250 xl:w-310 md:flex md:flex-row md:gap-4 md:items-center md:mx-auto md:transition-all"
+  >
+    <a href="" class="flex-none">
       <img src="/assets/images/aeris-title.png" alt="Aeris Web Title" />
     </a>
     <button class="btn btn-accent">Current Weather</button>
     <button class="btn btn-accent">5-day Forecast</button>
-    <form class="w-90">
-      <label class="input input-accent bg-base-100">
+    <form class="flex-grow">
+      <label class="input input-accent bg-base-100 w-full">
         <svg
           class="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"
@@ -30,5 +32,10 @@
         />
       </label>
     </form>
+  </nav>
+  <nav class="md:hidden">
+    <div>
+      <h1>mobile navbar</h1>
+    </div>
   </nav>
 </header>
