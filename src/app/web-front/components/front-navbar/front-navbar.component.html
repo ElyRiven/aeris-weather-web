@@ -1,12 +1,13 @@
 <header class="w-full h-fit bg-primary py-4 font-jost font-semibold">
   <nav
-    class="hidden md:w-180 lg:w-250 xl:w-310 md:flex md:flex-row md:gap-4 md:items-center md:mx-auto md:transition-all"
+    class="md:w-180 lg:w-250 xl:w-310 flex flex-row gap-4 items-center mx-1 md:mx-auto md:transition-all"
   >
-    <a href="" class="flex-none">
+    <!-- TABLET/DESKTOP MENU START -->
+    <a href="" class="hidden md:block">
       <img src="/assets/images/aeris-title.png" alt="Aeris Web Title" />
     </a>
-    <button class="btn btn-accent">Current Weather</button>
-    <button class="btn btn-accent">5-day Forecast</button>
+    <button class="hidden md:btn md:btn-accent">Current Weather</button>
+    <button class="hidden md:btn md:btn-accent">5-day Forecast</button>
     <form class="flex-grow">
       <label class="input input-accent bg-base-100 w-full">
         <svg
@@ -32,10 +33,40 @@
         />
       </label>
     </form>
-  </nav>
-  <nav class="md:hidden">
-    <div>
-      <h1>mobile navbar</h1>
+    <!-- TABLET/DESKTOP MENU END -->
+
+    <!-- MOBILE MENU START -->
+    <button
+      class="bg-accent p-2 rounded-full active:bg-base-200/50 md:hidden"
+      (click)="menu.hidden = !menu.hidden"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-menu-icon lucide-menu"
+      >
+        <path d="M4 12h16" />
+        <path d="M4 18h16" />
+        <path d="M4 6h16" />
+      </svg>
+    </button>
+    <div
+      class="p-2 w-fit absolute top-17 right-1 bg-accent rounded-box md:hidden"
+      #menu
+      hidden
+    >
+      <div class="flex flex-col gap-2 items-center justify-center">
+        <button class="btn btn-accent w-full">Current Weather</button>
+        <button class="btn btn-accent w-full">5-day Forecast</button>
+      </div>
     </div>
+    <!-- MOBILE MENU END -->
   </nav>
 </header>
