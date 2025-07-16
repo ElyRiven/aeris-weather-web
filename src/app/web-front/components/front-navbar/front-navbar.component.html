@@ -2,8 +2,8 @@
   <nav
     class="md:w-180 lg:w-250 xl:w-310 flex flex-row gap-4 items-center mx-1 md:mx-auto md:transition-all"
   >
-    <!-- TABLET/DESKTOP MENU START -->
-    <a href="" class="hidden md:block">
+    <!-- TABLET/DESKTOP NAVBAR START -->
+    <a href="">
       <img src="/assets/images/aeris-title.png" alt="Aeris Web Title" />
     </a>
     <button class="hidden md:btn md:btn-accent">Current Weather</button>
@@ -33,12 +33,12 @@
         />
       </label>
     </form>
-    <!-- TABLET/DESKTOP MENU END -->
+    <!-- TABLET/DESKTOP NAVBAR END -->
 
     <!-- MOBILE MENU START -->
     <button
       class="bg-accent p-2 rounded-full active:bg-base-200/50 md:hidden"
-      (click)="menu.hidden = !menu.hidden"
+      (click)="isMenuOpen.set(!isMenuOpen())"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -57,16 +57,23 @@
         <path d="M4 6h16" />
       </svg>
     </button>
+    @if ( isMenuOpen() ) {
     <div
+      class="absolute inset-0"
+      aria-hidden="true"
+      (click)="isMenuOpen.set(false)"
+    ></div>
+    <div
+      @menuAnimation
       class="p-2 w-fit absolute top-17 right-1 bg-accent rounded-box md:hidden"
-      #menu
-      hidden
     >
       <div class="flex flex-col gap-2 items-center justify-center">
         <button class="btn btn-accent w-full">Current Weather</button>
         <button class="btn btn-accent w-full">5-day Forecast</button>
       </div>
     </div>
+    }
+
     <!-- MOBILE MENU END -->
   </nav>
 </header>
