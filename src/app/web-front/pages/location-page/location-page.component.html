@@ -2,17 +2,136 @@
 <section
   class="w-full h-fit py-8 border border-secondary-content/50 rounded-box bg-linear-(--sunny-gradient)"
 >
-  <div
-    class="flex flex-row items-center justify-center gap-[50px] mx-auto w-fit"
-  >
-    <div>
-      <p>Sunrise, Sunset</p>
+  <div class="flex flex-row items-end justify-center gap-[50px] mx-auto w-fit">
+    <div class="flex flex-col gap-[10px] text-lg">
+      <div class="flex flex-row gap-5 items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="35"
+          height="35"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#2d3748"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-thermometer-sun-icon lucide-thermometer-sun"
+        >
+          <path d="M12 9a4 4 0 0 0-2 7.5" />
+          <path d="M12 3v2" />
+          <path d="m6.6 18.4-1.4 1.4" />
+          <path d="M20 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z" />
+          <path d="M4 13H2" />
+          <path d="M6.34 7.34 4.93 5.93" />
+        </svg>
+        <p><span>Max: </span><span>50</span>°</p>
+      </div>
+
+      <div class="flex flex-row gap-5 items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="35"
+          height="35"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#2d3748"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-thermometer-snowflake-icon lucide-thermometer-snowflake"
+        >
+          <path d="m10 20-1.25-2.5L6 18" />
+          <path d="M10 4 8.75 6.5 6 6" />
+          <path d="M10.585 15H10" />
+          <path d="M2 12h6.5L10 9" />
+          <path d="M20 14.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0z" />
+          <path d="m4 10 1.5 2L4 14" />
+          <path d="m7 21 3-6-1.5-3" />
+          <path d="m7 3 3 6h2" />
+        </svg>
+        <p><span>Min: </span><span>43</span>°</p>
+      </div>
     </div>
-    <div>
-      <h1>Temperature 30</h1>
+    <div class="flex flex-col items-center justify-center gap-[10px]">
+      <p class="text-3xl font-bold"><span>Quito</span>, <span>Ecuador</span></p>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="60"
+        height="60"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#2d3748"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-cloud-sun-icon lucide-cloud-sun"
+      >
+        <path d="M12 2v2" />
+        <path d="m4.93 4.93 1.41 1.41" />
+        <path d="M20 12h2" />
+        <path d="m19.07 4.93-1.41 1.41" />
+        <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+        <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
+      </svg>
+      <div class="flex flex-col items-center justify-center">
+        <p class="text-9xl/normal font-light"><span>50</span>°</p>
+        <p class="text-3xl/normal"><span>Feels like: </span><span>48</span>°</p>
+        <p class="text-3xl/normal font-semibold">
+          <span>Partly Cloud</span>
+        </p>
+      </div>
     </div>
-    <div>
-      <p>Max Min Temp</p>
+    <div class="flex flex-col gap-[10px] text-lg">
+      <div class="flex flex-row gap-5 items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="35"
+          height="35"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#2d3748"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-sunrise-icon lucide-sunrise"
+        >
+          <path d="M12 2v8" />
+          <path d="m4.93 10.93 1.41 1.41" />
+          <path d="M2 18h2" />
+          <path d="M20 18h2" />
+          <path d="m19.07 10.93-1.41 1.41" />
+          <path d="M22 22H2" />
+          <path d="m8 6 4-4 4 4" />
+          <path d="M16 18a4 4 0 0 0-8 0" />
+        </svg>
+        <!-- <p><span>Sunrise: </span><span>16:30</span></p> -->
+        <p>Sunrise: 16:30</p>
+      </div>
+      <div class="flex flex-row gap-5 items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="35"
+          height="35"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#2d3748"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-sunset-icon lucide-sunset"
+        >
+          <path d="M12 10V2" />
+          <path d="m4.93 10.93 1.41 1.41" />
+          <path d="M2 18h2" />
+          <path d="M20 18h2" />
+          <path d="m19.07 10.93-1.41 1.41" />
+          <path d="M22 22H2" />
+          <path d="m16 6-4 4-4-4" />
+          <path d="M16 18a4 4 0 0 0-8 0" />
+        </svg>
+        <!-- <p><span>Sunset: </span><span>05:00</span></p> -->
+        <p>Sunset: 5:00</p>
+      </div>
     </div>
   </div>
 </section>
