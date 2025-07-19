@@ -2,15 +2,17 @@
 <section
   class="w-full h-fit py-8 border border-secondary-content/50 rounded-box bg-linear-(--sunny-gradient)"
 >
-  <div class="relative">
-    <div class="flex flex-row gap-[10px] absolute left-4">
-      <span class="font-semibold text-xl">ºC</span>
+  <div class="relative transition-all">
+    <div
+      class="flex flex-row items-center justify-center gap-[10px] absolute left-4"
+    >
+      <span class="font-semibold text-base sm:text-lg md:text-xl">ºC</span>
       <input
         type="checkbox"
         checked="checked"
-        class="toggle toggle-lg checked:bg-transparent"
+        class="toggle toggle-sm sm:toggle-md lg:toggle-lg checked:bg-transparent"
       />
-      <span class="font-semibold text-xl">ºF</span>
+      <span class="font-semibold text-base sm:text-lg md:text-xl">ºF</span>
     </div>
   </div>
   <div class="flex flex-row items-end justify-center gap-[50px] mx-auto w-fit">
@@ -64,7 +66,9 @@
       </div>
     </div>
     <div class="flex flex-col items-center justify-center gap-[10px]">
-      <p class="text-3xl font-bold"><span>Quito</span>, <span>Ecuador</span></p>
+      <p class="text-3xl font-bold text-center">
+        <span>Quito</span>, <span>Ecuador</span>
+      </p>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="60"
