@@ -6,13 +6,21 @@
     <div
       class="flex flex-row items-center justify-center gap-[10px] absolute left-4"
     >
-      <span class="font-semibold text-base sm:text-lg md:text-xl">ºC</span>
+      <span
+        [class]="{ 'text-secondary-content/50': temperatureUnit() === 'f' }"
+        class="font-semibold text-base sm:text-lg md:text-xl"
+        >ºC</span
+      >
       <input
         type="checkbox"
-        checked="checked"
-        class="toggle toggle-sm sm:toggle-md lg:toggle-lg checked:bg-transparent"
+        class="toggle toggle-sm sm:toggle-md lg:toggle-lg checked:bg-transparent text-primary-content"
+        (change)="toggleUnit($event)"
       />
-      <span class="font-semibold text-base sm:text-lg md:text-xl">ºF</span>
+      <span
+        [class]="{ 'text-secondary-content/50': temperatureUnit() === 'c' }"
+        class="font-semibold text-base sm:text-lg md:text-xl"
+        >ºF</span
+      >
     </div>
   </div>
   <div class="flex flex-row items-end justify-center gap-[50px] mx-auto w-fit">
