@@ -1,10 +1,7 @@
 export interface UserLocation {
-  city: string;
+  location: string;
   country: string;
-  coords: UserCoordinates;
-}
-
-export interface UserCoordinates {
+  state: string;
   lat: number;
-  long: number;
+  lon: number;
 }
