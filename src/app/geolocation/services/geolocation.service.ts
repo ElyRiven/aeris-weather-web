@@ -3,7 +3,10 @@ import { inject, Injectable } from '@angular/core';
 
 import { catchError, map, Observable, throwError } from 'rxjs';
 
-import { UserLocation } from '@front/interfaces/location.interface';
+import {
+  Coordinates,
+  UserLocation,
+} from '@front/interfaces/location.interface';
 import { GeolocationResponse } from '@geolocation/interfaces/geolocation-resp.interface';
 import { GeolocationMapper } from '@geolocation/mappers/geolocation.mapper';
 import { DefaultGeolocation } from '@geolocation/interfaces/ipapi-resp.interface';
@@ -55,5 +58,34 @@ export class GeolocationService {
         return throwError(() => new Error('Could not get user geolocation'));
       })
     );
+  }
+
+  //* Precise Browser Location Call
+  getPreciseUserLocation(): Observable<Coordinates | undefined> {
+    return new Observable((observer) => {
+      if (!navigator.geolocation) {
+        observer.error('Geolocation is not supported on your browser');
+        observer.complete();
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          observer.next({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+          observer.complete();
+        },
+        (error) => {
+          observer.error('Geolocation access denied by user');
+          observer.complete();
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0,
+        }
+      );
+    });
   }
 }
