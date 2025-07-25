@@ -5,7 +5,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@front/*": ["./src/app/web-front/*"]
+      "@front/*": ["./src/app/web-front/*"],
+      "@geolocation/*": ["./src/app/geolocation/*"],
+      "@weather-api/*": ["./src/app/weather-api/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
