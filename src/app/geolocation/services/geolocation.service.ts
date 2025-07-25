@@ -8,7 +8,7 @@ import { GeolocationResponse } from '@geolocation/interfaces/geolocation-resp.in
 import { GeolocationMapper } from '@geolocation/mappers/geolocation.mapper';
 import { DefaultGeolocation } from '@geolocation/interfaces/ipapi-resp.interface';
 
-const IPAPI_URL = 'https://ipapi.co/json/';
+const IPAPI_URL = 'http://ip-api.com/json/';
 const GEOLOCATION_API_URL = 'https://api.openweathermap.org/geo';
 const API_VERSION = '1.0';
 

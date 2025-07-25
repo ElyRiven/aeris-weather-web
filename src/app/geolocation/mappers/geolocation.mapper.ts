@@ -21,10 +21,10 @@ export class GeolocationMapper {
   ): UserLocation {
     return {
       location: geolocation.city,
-      country: geolocation.country_name,
-      state: geolocation.region,
-      lat: geolocation.latitude,
-      lon: geolocation.longitude,
+      country: geolocation.country,
+      state: geolocation.regionName,
+      lat: geolocation.lat,
+      lon: geolocation.lon,
     };
   }
 }
