@@ -3,15 +3,18 @@ import { GeolocationResponse } from '@geolocation/interfaces/geolocation-resp.in
 import { DefaultGeolocation } from '@geolocation/interfaces/ipapi-resp.interface';
 
 export class GeolocationMapper {
+  // * OpenWeather Mapper
   static mapGeolocationToUserLocation(
-    geolocation: GeolocationResponse
+    geolocation: GeolocationResponse,
+    preciseLat: number,
+    preciseLon: number
   ): UserLocation {
     return {
       location: geolocation.name,
       country: geolocation.country,
       state: geolocation.state,
-      lat: geolocation.lat,
-      lon: geolocation.lon,
+      lat: preciseLat,
+      lon: preciseLon,
     };
   }
 
@@ -21,7 +24,7 @@ export class GeolocationMapper {
   ): UserLocation {
     return {
       location: geolocation.city,
-      country: geolocation.country,
+      country: geolocation.countryCode,
       state: geolocation.regionName,
       lat: geolocation.lat,
       lon: geolocation.lon,

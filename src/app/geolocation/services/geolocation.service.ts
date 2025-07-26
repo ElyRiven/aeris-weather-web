@@ -10,10 +10,12 @@ import {
 import { GeolocationResponse } from '@geolocation/interfaces/geolocation-resp.interface';
 import { GeolocationMapper } from '@geolocation/mappers/geolocation.mapper';
 import { DefaultGeolocation } from '@geolocation/interfaces/ipapi-resp.interface';
+import { environment } from 'src/environments/environment';
 
 const IPAPI_URL = 'http://ip-api.com/json/';
 const GEOLOCATION_API_URL = 'https://api.openweathermap.org/geo';
 const API_VERSION = '1.0';
+const GEOLOCATION_API_KEY = environment.openweatherkey;
 
 @Injectable({ providedIn: 'root' })
 export class GeolocationService {
@@ -25,26 +27,35 @@ export class GeolocationService {
   // }
 
   // TODO: Implement Reverse Geolocation Call
-  // getReverseGeolocation(lat: number, lon: number): Observable<UserLocation> {
-  //   return this.#http
-  //     .get<GeolocationResponse[]>(
-  //       `${GEOLOCATION_API_URL}/${API_VERSION}/revese`,
-  //       {
-  //         params: {
-  //           lat,
-  //           lon,
-  //           limit: 5,
-  //           appid: '',
-  //         },
-  //       }
-  //     )
-  //     .pipe(
-  //       map((response) =>
-  //         GeolocationMapper.mapGeolocationToUserLocation(response[0])
-  //       ),
-  //       catchError()
-  //     );
-  // }
+  getReverseGeolocation(lat: number, lon: number): Observable<UserLocation> {
+    return this.#http
+      .get<GeolocationResponse[]>(
+        `${GEOLOCATION_API_URL}/${API_VERSION}/reverse`,
+        {
+          params: {
+            lat,
+            lon,
+            limit: 5,
+            appid: GEOLOCATION_API_KEY,
+          },
+        }
+      )
+      .pipe(
+        map((response) =>
+          GeolocationMapper.mapGeolocationToUserLocation(response[0], lat, lon)
+        ),
+        catchError((error) => {
+          console.error('Error fetching reverse geolocation', error);
+
+          return throwError(
+            () =>
+              new Error(
+                'Could not get reverse geolocation for the given coordinates'
+              )
+          );
+        })
+      );
+  }
 
   //* IpAPI get geolocation call
   getDefaultGeolocation(): Observable<UserLocation> {
@@ -52,7 +63,7 @@ export class GeolocationService {
       map((response) =>
         GeolocationMapper.mapDefaultGeolocationToUserLocation(response)
       ),
-      catchError((error, response) => {
+      catchError((error) => {
         console.error('Error fetching geolocation', error);
 
         return throwError(() => new Error('Could not get user geolocation'));
