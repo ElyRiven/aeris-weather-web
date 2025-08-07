@@ -1,5 +1,4 @@
-import { JsonPipe } from '@angular/common';
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 
 import { rxResource } from '@angular/core/rxjs-interop';
 
@@ -8,7 +7,7 @@ import { GeolocationService } from '@geolocation/services/geolocation.service';
 
 @Component({
   selector: 'location-page',
-  imports: [JsonPipe],
+  imports: [],
   templateUrl: './location-page.component.html',
 })
 export class LocationPageComponent {
@@ -41,7 +40,11 @@ export class LocationPageComponent {
   });
 
   // TODO: Implement weather call effect with the default coods
-  // defaultWeatherEffect = effect
+  defaultWeatherEffect = effect(() => {
+    if (!this.defaultLocation()) return;
+
+    // TODO: Call weather call with the default coords
+  });
 
   reverseGeolocationEffect = effect(() => {
     const preciseLocation = this.preciseGeolocationRx.value();
