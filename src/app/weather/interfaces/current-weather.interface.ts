@@ -16,13 +16,13 @@ export interface Weather {
   temp_max: number;
   sunrise: number;
   sunset: number;
-  rain?: Rain;
-  snow?: Snow;
+  rain?: number;
+  snow?: number;
   humidity: number;
   pressure: number;
   wind: Wind;
   visibility: number;
-  clouds: Clouds;
+  clouds: number;
 }
 
 export interface AirQuality {

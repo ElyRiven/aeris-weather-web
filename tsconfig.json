@@ -7,7 +7,7 @@
     "paths": {
       "@front/*": ["./src/app/web-front/*"],
       "@geolocation/*": ["./src/app/geolocation/*"],
-      "@weather-api/*": ["./src/app/weather-api/*"]
+      "@weather/*": ["./src/app/weather/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
