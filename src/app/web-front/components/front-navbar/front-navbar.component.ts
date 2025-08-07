@@ -1,4 +1,4 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({

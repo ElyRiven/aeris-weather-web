@@ -3,13 +3,13 @@ import { inject, Injectable } from '@angular/core';
 
 import { catchError, map, Observable, throwError } from 'rxjs';
 
-import {
+import type {
   Coordinates,
   UserLocation,
 } from '@front/interfaces/location.interface';
-import { GeolocationResponse } from '@geolocation/interfaces/geolocation-resp.interface';
+import type { GeolocationResponse } from '@geolocation/interfaces/geolocation-resp.interface';
+import type { DefaultGeolocation } from '@geolocation/interfaces/ipapi-resp.interface';
 import { GeolocationMapper } from '@geolocation/mappers/geolocation.mapper';
-import { DefaultGeolocation } from '@geolocation/interfaces/ipapi-resp.interface';
 import { environment } from 'src/environments/environment';
 
 const IPAPI_URL = 'http://ip-api.com/json/';

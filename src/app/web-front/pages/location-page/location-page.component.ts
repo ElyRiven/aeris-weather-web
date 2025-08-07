@@ -2,7 +2,7 @@ import { Component, effect, inject, signal } from '@angular/core';
 
 import { rxResource } from '@angular/core/rxjs-interop';
 
-import { UserLocation } from '@front/interfaces/location.interface';
+import type { UserLocation } from '@front/interfaces/location.interface';
 import { GeolocationService } from '@geolocation/services/geolocation.service';
 
 @Component({

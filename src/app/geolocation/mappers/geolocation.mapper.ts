@@ -1,6 +1,6 @@
-import { UserLocation } from '@front/interfaces/location.interface';
-import { GeolocationResponse } from '@geolocation/interfaces/geolocation-resp.interface';
-import { DefaultGeolocation } from '@geolocation/interfaces/ipapi-resp.interface';
+import type { UserLocation } from '@front/interfaces/location.interface';
+import type { GeolocationResponse } from '@geolocation/interfaces/geolocation-resp.interface';
+import type { DefaultGeolocation } from '@geolocation/interfaces/ipapi-resp.interface';
 
 export class GeolocationMapper {
   // * OpenWeather Mapper
