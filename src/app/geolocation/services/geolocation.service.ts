@@ -27,6 +27,7 @@ export class GeolocationService {
   // }
 
   // TODO: Implement Reverse Geolocation Call
+  // * OpenWeather Reverse Geolocation Call
   getReverseGeolocation(lat: number, lon: number): Observable<UserLocation> {
     return this.#http
       .get<GeolocationResponse[]>(
