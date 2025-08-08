@@ -1,22 +1,35 @@
+import { JsonPipe } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 
 import { rxResource } from '@angular/core/rxjs-interop';
 
 import type { UserLocation } from '@front/interfaces/location.interface';
 import { GeolocationService } from '@geolocation/services/geolocation.service';
+import {
+  Weather,
+  CurrentWeather,
+} from '@weather/interfaces/current-weather.interface';
+import { CurrentWeatherMapper } from '@weather/mappers/current-weather.mapper';
+import { AirQualityService } from '@weather/services/air-quality.service';
+import { CurrentWeatherService } from '@weather/services/current-weather.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'location-page',
-  imports: [],
+  imports: [JsonPipe],
   templateUrl: './location-page.component.html',
 })
 export class LocationPageComponent {
   #geolocationService = inject(GeolocationService);
+  #weatherService = inject(CurrentWeatherService);
+  #airService = inject(AirQualityService);
 
   public temperatureUnit = signal<'c' | 'f'>('c');
 
   public defaultLocation = signal<UserLocation | undefined>(undefined);
   public preciseLocation = signal<UserLocation | undefined>(undefined);
+
+  public weather = signal<CurrentWeather | undefined>(undefined);
 
   toggleUnit(event: Event): void {
     const tempInput = event.target as HTMLInputElement;
@@ -39,11 +52,22 @@ export class LocationPageComponent {
     this.defaultLocation.set(defaultLocation);
   });
 
-  // TODO: Implement weather call effect with the default coods
   defaultWeatherEffect = effect(() => {
     if (!this.defaultLocation()) return;
 
-    // TODO: Call weather call with the default coords
+    const { lat, lon } = this.defaultLocation()!;
+
+    forkJoin({
+      weather: this.#weatherService.getCurrentWeather(lat, lon),
+      air: this.#airService.getAirPollution(lat, lon),
+    }).subscribe(({ weather, air }) => {
+      const mapped = CurrentWeatherMapper.mapWeatherAirLocationToCurrentWeather(
+        weather,
+        air,
+        this.defaultLocation()!
+      );
+      this.weather.set(mapped);
+    });
   });
 
   reverseGeolocationEffect = effect(() => {

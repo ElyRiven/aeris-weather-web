@@ -23,6 +23,7 @@ export class CurrentWeatherService {
         params: {
           lat,
           lon,
+          units: 'metric',
           appid: WEATHER_API_KEY,
         },
       })
