@@ -1,9 +1,4 @@
-import {
-  DecimalPipe,
-  JsonPipe,
-  KeyValuePipe,
-  TitleCasePipe,
-} from '@angular/common';
+import { DecimalPipe, KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 
 import { rxResource } from '@angular/core/rxjs-interop';
@@ -110,9 +105,6 @@ export class LocationPageComponent {
       defaultLocation!.location.toLowerCase() !==
       preciseLocation!.location.toLowerCase()
     ) {
-      // TODO: Implement the weather call with the precise coords.
-      // this.weatherService.getCurrentWeather(lat,lon)
-
       const { lat, lon } = this.preciseLocation()!;
 
       forkJoin({
@@ -123,14 +115,10 @@ export class LocationPageComponent {
           CurrentWeatherMapper.mapWeatherAirLocationToCurrentWeather(
             weather,
             air,
-            this.defaultLocation()!
+            this.preciseLocation()!
           );
         this.currentWeather.set(mappedWeather);
       });
-
-      console.log(
-        'Localidades diferentes, hay que llamar nuevamente a la api de clima'
-      );
     }
   });
 

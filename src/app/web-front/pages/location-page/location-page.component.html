@@ -626,8 +626,7 @@
       <div
         class="flex flex-row flex-wrap sm:grid sm:grid-cols-2 items-center justify-center gap-5"
       >
-        @for (comp of (currentWeather()?.air?.components | keyvalue) ; track
-        $index ) {
+        <!-- CARD -->
         <div
           class="border border-secondary-content/50 rounded-box p-3 bg-secondary"
         >
@@ -666,99 +665,21 @@
                   mask="url(#ipSCheckOne0)"
                 />
               </svg>
-              @if ( comp.key === 'no2' ) {
               <p class="font-bold text-lg">NO<sub>2</sub></p>
-              }
-              <!--  -->
-              @if ( comp.key === 'so2' ) {
-              <p class="font-bold text-lg">SO<sub>2</sub></p>
-              }
-              <!--  -->
-              @if ( comp.key === 'pm2_5' ) {
-              <p class="font-bold text-lg">PM<sub>2.5</sub></p>
-              }
-              <!--  -->
-              @if ( comp.key === 'pm10' ) {
-              <p class="font-bold text-lg">PM<sub>10</sub></p>
-              }
-              <!--  -->
-              @if ( comp.key === 'o3' ) {
-              <p class="font-bold text-lg">O<sub>3</sub></p>
-              }
-              <!--  -->
-              @if ( comp.key === 'co' ) {
-              <p class="font-bold text-lg">CO</p>
-              }
-              <!--  -->
-              @if ( comp.key === 'nh3' ) {
-              <p class="font-bold text-lg">NH<sub>3</sub></p>
-              }
-              <!--  -->
-              @if ( comp.key === 'no' ) {
-              <p class="font-bold text-lg">NO</p>
-              }
             </div>
             <div
               class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
             >
-              <span class="text-lg">{{ comp.value }}</span>
+              <span
+                class="text-lg"
+                >{{ currentWeather()?.air?.components?.['no2'] | number : '1.0-0' }}</span
+              >
               <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
             </div>
           </div>
         </div>
-        }
-
         <!-- CARD -->
-        <!-- <div
-          class="border border-secondary-content/50 rounded-box p-3 bg-secondary"
-        >
-          <div
-            class="flex flex-col sm:flex-row items-center justify-between gap-[10px] sm:w-50 md:w-62 lg:w-97 xl:w-100"
-          >
-            <div
-              class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                viewBox="0 0 48 48"
-                class="text-success order-2 sm:order-none"
-              >
-                <defs>
-                  <mask id="ipSCheckOne0">
-                    <g fill="none" stroke-linejoin="round" stroke-width="4">
-                      <path
-                        fill="#fff"
-                        stroke="#fff"
-                        d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"
-                      />
-                      <path
-                        stroke="#000"
-                        stroke-linecap="round"
-                        d="m16 24l6 6l12-12"
-                      />
-                    </g>
-                  </mask>
-                </defs>
-                <path
-                  fill="currentColor"
-                  d="M0 0h48v48H0z"
-                  mask="url(#ipSCheckOne0)"
-                />
-              </svg>
-              <p class="font-bold text-lg">NO<sub>2</sub></p>
-            </div>
-            <div
-              class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
-            >
-              <span class="text-lg">50</span>
-              <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
-            </div>
-          </div>
-        </div> -->
-        <!-- CARD -->
-        <!-- <div
+        <div
           class="border border-secondary-content/50 rounded-box p-3 bg-secondary"
         >
           <div
@@ -801,13 +722,16 @@
             <div
               class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
             >
-              <span class="text-lg">18</span>
+              <span
+                class="text-lg"
+                >{{ currentWeather()?.air?.components?.['so2'] | number : '1.0-0' }}</span
+              >
               <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
             </div>
           </div>
-        </div> -->
+        </div>
         <!-- CARD -->
-        <!-- <div
+        <div
           class="border border-secondary-content/50 rounded-box p-3 bg-secondary"
         >
           <div
@@ -850,13 +774,16 @@
             <div
               class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
             >
-              <span class="text-lg">8.2</span>
+              <span
+                class="text-lg"
+                >{{ currentWeather()?.air?.components?.['pm2_5'] | number : '1.0-0' }}</span
+              >
               <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
             </div>
           </div>
-        </div> -->
+        </div>
         <!-- CARD -->
-        <!-- <div
+        <div
           class="border border-secondary-content/50 rounded-box p-3 bg-secondary"
         >
           <div
@@ -899,13 +826,16 @@
             <div
               class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
             >
-              <span class="text-lg">18.5</span>
+              <span
+                class="text-lg"
+                >{{ currentWeather()?.air?.components?.['pm10'] | number : '1.0-0' }}</span
+              >
               <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
             </div>
           </div>
-        </div> -->
+        </div>
         <!-- CARD -->
-        <!-- <div
+        <div
           class="border border-secondary-content/50 rounded-box p-3 bg-secondary"
         >
           <div
@@ -948,13 +878,16 @@
             <div
               class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
             >
-              <span class="text-lg">52.08</span>
+              <span
+                class="text-lg"
+                >{{ currentWeather()?.air?.components?.['o3'] | number : '1.0-0' }}</span
+              >
               <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
             </div>
           </div>
-        </div> -->
+        </div>
         <!-- CARD -->
-        <!-- <div
+        <div
           class="border border-secondary-content/50 rounded-box p-3 bg-secondary"
         >
           <div
@@ -997,11 +930,14 @@
             <div
               class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
             >
-              <span class="text-lg">3420</span>
+              <span
+                class="text-lg"
+                >{{ currentWeather()?.air?.components?.['co'] | number : '1.0-0' }}</span
+              >
               <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </section>
