@@ -1,4 +1,4 @@
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 
 import { rxResource } from '@angular/core/rxjs-interop';
@@ -10,13 +10,15 @@ import {
   CurrentWeather,
 } from '@weather/interfaces/current-weather.interface';
 import { CurrentWeatherMapper } from '@weather/mappers/current-weather.mapper';
+import { TemperaturePipe } from '@weather/pipes/temperature.pipe';
+import { TimePipe } from '@weather/pipes/time.pipe';
 import { AirQualityService } from '@weather/services/air-quality.service';
 import { CurrentWeatherService } from '@weather/services/current-weather.service';
 import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'location-page',
-  imports: [JsonPipe],
+  imports: [KeyValuePipe, TemperaturePipe, TitleCasePipe, TimePipe],
   templateUrl: './location-page.component.html',
 })
 export class LocationPageComponent {
@@ -29,7 +31,7 @@ export class LocationPageComponent {
   public defaultLocation = signal<UserLocation | undefined>(undefined);
   public preciseLocation = signal<UserLocation | undefined>(undefined);
 
-  public weather = signal<CurrentWeather | undefined>(undefined);
+  public currentWeather = signal<CurrentWeather | undefined>(undefined);
 
   toggleUnit(event: Event): void {
     const tempInput = event.target as HTMLInputElement;
@@ -61,12 +63,13 @@ export class LocationPageComponent {
       weather: this.#weatherService.getCurrentWeather(lat, lon),
       air: this.#airService.getAirPollution(lat, lon),
     }).subscribe(({ weather, air }) => {
-      const mapped = CurrentWeatherMapper.mapWeatherAirLocationToCurrentWeather(
-        weather,
-        air,
-        this.defaultLocation()!
-      );
-      this.weather.set(mapped);
+      const mappedWeather =
+        CurrentWeatherMapper.mapWeatherAirLocationToCurrentWeather(
+          weather,
+          air,
+          this.defaultLocation()!
+        );
+      this.currentWeather.set(mappedWeather);
     });
   });
 
@@ -94,6 +97,22 @@ export class LocationPageComponent {
     ) {
       // TODO: Implement the weather call with the precise coords.
       // this.weatherService.getCurrentWeather(lat,lon)
+
+      const { lat, lon } = this.preciseLocation()!;
+
+      forkJoin({
+        weather: this.#weatherService.getCurrentWeather(lat, lon),
+        air: this.#airService.getAirPollution(lat, lon),
+      }).subscribe(({ weather, air }) => {
+        const mappedWeather =
+          CurrentWeatherMapper.mapWeatherAirLocationToCurrentWeather(
+            weather,
+            air,
+            this.defaultLocation()!
+          );
+        this.currentWeather.set(mappedWeather);
+      });
+
       console.log(
         'Localidades diferentes, hay que llamar nuevamente a la api de clima'
       );

@@ -1,6 +1,8 @@
 import type { APIWeatherResponse } from '@weather/interfaces/api-weather-response.interface';
 import type { Weather } from '@weather/interfaces/current-weather.interface';
 
+const ICON_URL = 'https://openweathermap.org/img/wn';
+
 export class WeatherMapper {
   // * OpenWeather Current Weather Response Mapper
   static mapApiWeatherResponseToWeather(
@@ -8,7 +10,7 @@ export class WeatherMapper {
   ): Weather {
     return {
       temp: weatherResponse.main.temp,
-      icon: weatherResponse.weather[0].icon,
+      icon: `${ICON_URL}/${weatherResponse.weather[0].icon}@2x.png`,
       feels_like: weatherResponse.main.feels_like,
       description: weatherResponse.weather[0].description,
       temp_min: weatherResponse.main.temp_min,
