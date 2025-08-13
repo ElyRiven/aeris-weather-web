@@ -1,24 +1,39 @@
-import { JsonPipe, KeyValuePipe, TitleCasePipe } from '@angular/common';
+import {
+  DecimalPipe,
+  JsonPipe,
+  KeyValuePipe,
+  TitleCasePipe,
+} from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 
 import { rxResource } from '@angular/core/rxjs-interop';
+import { forkJoin } from 'rxjs';
 
 import type { UserLocation } from '@front/interfaces/location.interface';
+import type { CurrentWeather } from '@weather/interfaces/current-weather.interface';
+
 import { GeolocationService } from '@geolocation/services/geolocation.service';
-import {
-  Weather,
-  CurrentWeather,
-} from '@weather/interfaces/current-weather.interface';
-import { CurrentWeatherMapper } from '@weather/mappers/current-weather.mapper';
-import { TemperaturePipe } from '@weather/pipes/temperature.pipe';
-import { TimePipe } from '@weather/pipes/time.pipe';
 import { AirQualityService } from '@weather/services/air-quality.service';
 import { CurrentWeatherService } from '@weather/services/current-weather.service';
-import { forkJoin } from 'rxjs';
+
+import { CurrentWeatherMapper } from '@weather/mappers/current-weather.mapper';
+
+import { TemperaturePipe } from '@weather/pipes/temperature.pipe';
+import { TimePipe } from '@weather/pipes/time.pipe';
+import { WindDirectionPipe } from '@weather/pipes/wind-direction.pipe';
+import { VisibilityPipe } from '@weather/pipes/visibility.pipe';
 
 @Component({
   selector: 'location-page',
-  imports: [KeyValuePipe, TemperaturePipe, TitleCasePipe, TimePipe],
+  imports: [
+    KeyValuePipe,
+    TemperaturePipe,
+    TitleCasePipe,
+    TimePipe,
+    DecimalPipe,
+    WindDirectionPipe,
+    VisibilityPipe,
+  ],
   templateUrl: './location-page.component.html',
 })
 export class LocationPageComponent {
@@ -118,4 +133,23 @@ export class LocationPageComponent {
       );
     }
   });
+
+  getWindDirectionClass(degrees: number | undefined): string {
+    if (!degrees) return '';
+
+    const directionClassesArray = [
+      '-rotate-45',
+      'rotate-0',
+      'rotate-45',
+      'rotate-90',
+      'rotate-135',
+      'rotate-180',
+      '-rotate-135',
+      '-rotate-90',
+    ];
+
+    const index = Math.round(degrees / 45) % 8;
+
+    return directionClassesArray[index];
+  }
 }

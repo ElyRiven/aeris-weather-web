@@ -11,4 +11,21 @@ export class WeatherUtils {
 
     return `${hour}:${minutes}`;
   }
+
+  static getWindDirectionString(degrees: number, short: boolean): string {
+    const shortDirArray = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    const longDirArray = [
+      'North',
+      'Northeast',
+      'East',
+      'Southeast',
+      'South',
+      'Southwest',
+      'West',
+      'Northwest',
+    ];
+    const index = Math.round(degrees / 45) % 8;
+
+    return short ? shortDirArray[index] : longDirArray[index];
+  }
 }

@@ -495,7 +495,9 @@
         >
           <span class="hidden xs:inline">Wind Speed</span>
           <div>
-            <span>{{ currentWeather()?.weather?.wind?.speed }}</span
+            <span>{{
+              currentWeather()?.weather?.wind?.speed | number : "1.0-1"
+            }}</span
             ><span> m/s</span>
           </div>
         </div>
@@ -512,7 +514,8 @@
           width="35"
           height="35"
           viewBox="0 0 14 14"
-          class="-rotate-45 shrink-0"
+          class="shrink-0"
+          [class]="getWindDirectionClass(currentWeather()?.weather?.wind?.deg)"
         >
           <path
             fill="currentColor"
@@ -526,8 +529,12 @@
         >
           <span class="hidden xs:inline">Wind Direction</span>
           <div>
-            <span class="hidden lg:inline">North</span
-            ><span class="lg:hidden">N</span>
+            <span class="hidden lg:inline">{{
+              currentWeather()?.weather?.wind?.deg | windDirection : false
+            }}</span
+            ><span class="lg:hidden">{{
+              currentWeather()?.weather?.wind?.deg | windDirection
+            }}</span>
           </div>
         </div>
       </div>
@@ -560,7 +567,11 @@
         >
           <span class="hidden xs:inline">Visibility</span>
           <div>
-            <span>{{ currentWeather()?.weather?.visibility }}</span
+            <span>{{
+              currentWeather()?.weather?.visibility
+                | visibility
+                | number : "1.0-1"
+            }}</span
             ><span> Km</span>
           </div>
         </div>
