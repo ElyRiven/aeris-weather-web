@@ -17,17 +17,20 @@ import { TemperaturePipe } from '@weather/pipes/temperature.pipe';
 import { TimePipe } from '@weather/pipes/time.pipe';
 import { WindDirectionPipe } from '@weather/pipes/wind-direction.pipe';
 import { VisibilityPipe } from '@weather/pipes/visibility.pipe';
+import { AirTextPipe } from '@weather/pipes/aqi-text.pipe';
+import { AirDescriptionPipe } from '@weather/pipes/aqi-description.pipe';
 
 @Component({
   selector: 'location-page',
   imports: [
-    KeyValuePipe,
     TemperaturePipe,
     TitleCasePipe,
     TimePipe,
     DecimalPipe,
     WindDirectionPipe,
     VisibilityPipe,
+    AirTextPipe,
+    AirDescriptionPipe,
   ],
   templateUrl: './location-page.component.html',
 })

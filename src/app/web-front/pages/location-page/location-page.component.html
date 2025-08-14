@@ -618,9 +618,11 @@
       <h2 class="font-semibold text-xl text-center">Air Quality</h2>
       <div class="flex flex-col items-center justify-center">
         <p class="font-semibold text-3xl">{{ currentWeather()?.air?.aqi }}</p>
-        <p class="font-semibold text-lg">Good</p>
+        <p class="font-semibold text-lg">
+          {{ currentWeather()?.air?.aqi | airText | titlecase }}
+        </p>
         <p class="text-secondary-content text-center">
-          The air quality is good. Enjoy your usual outdoor activities.
+          {{ currentWeather()?.air?.aqi | airText | airDescription }}
         </p>
       </div>
       <div
@@ -636,7 +638,38 @@
             <div
               class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
             >
+              <!-- ALERT ICON -->
               <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 512 512"
+                class="text-error order-2 sm:order-none"
+              >
+                <path
+                  fill="currentColor"
+                  d="M256 512a256 256 0 1 0 0-512a256 256 0 1 0 0 512m-89-345c9.4-9.4 24.6-9.4 33.9 0l55 55l55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55l55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55l-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55l-55-55c-9.4-9.4-9.4-24.6 0-33.9"
+                  stroke-width="13"
+                  stroke="currentColor"
+                />
+              </svg>
+              <!-- WARNING ICON -->
+              <!-- <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 2048 2048"
+                class="text-warning order-2 sm:order-none"
+              >
+                <path
+                  fill="currentColor"
+                  d="M1024 0q141 0 272 36t244 104t207 160t161 207t103 245t37 272q0 141-36 272t-104 244t-160 207t-207 161t-245 103t-272 37q-141 0-272-36t-244-104t-207-160t-161-207t-103-245t-37-272q0-141 36-272t104-244t160-207t207-161T752 37t272-37m128 1536v-256H896v256zm0-384V512H896v640z"
+                  stroke-width="51"
+                  stroke="currentColor"
+                />
+              </svg> -->
+              <!-- NORMAL ICON -->
+              <!-- <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
                 height="15"
@@ -664,7 +697,7 @@
                   d="M0 0h48v48H0z"
                   mask="url(#ipSCheckOne0)"
                 />
-              </svg>
+              </svg> -->
               <p class="font-bold text-lg">NO<sub>2</sub></p>
             </div>
             <div
