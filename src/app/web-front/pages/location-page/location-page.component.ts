@@ -19,6 +19,7 @@ import { WindDirectionPipe } from '@weather/pipes/wind-direction.pipe';
 import { VisibilityPipe } from '@weather/pipes/visibility.pipe';
 import { AirTextPipe } from '@weather/pipes/aqi-text.pipe';
 import { AirDescriptionPipe } from '@weather/pipes/aqi-description.pipe';
+import { AirQualityUtils } from '@weather/utils/air-quality-utils';
 
 @Component({
   selector: 'location-page',
@@ -38,6 +39,8 @@ export class LocationPageComponent {
   #geolocationService = inject(GeolocationService);
   #weatherService = inject(CurrentWeatherService);
   #airService = inject(AirQualityService);
+
+  public airUtils = AirQualityUtils;
 
   public temperatureUnit = signal<'c' | 'f'>('c');
 

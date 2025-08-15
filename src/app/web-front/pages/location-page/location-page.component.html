@@ -638,7 +638,61 @@
             <div
               class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
             >
-              <!-- ALERT ICON -->
+              @if ( currentWeather()?.air?.components?.['no2']?.category ===
+              'good' || currentWeather()?.air?.components?.['no2']?.category ===
+              'fair' ) {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 48 48"
+                class="text-success order-2 sm:order-none"
+              >
+                <defs>
+                  <mask id="ipSCheckOne0">
+                    <g fill="none" stroke-linejoin="round" stroke-width="4">
+                      <path
+                        fill="#fff"
+                        stroke="#fff"
+                        d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"
+                      />
+                      <path
+                        stroke="#000"
+                        stroke-linecap="round"
+                        d="m16 24l6 6l12-12"
+                      />
+                    </g>
+                  </mask>
+                </defs>
+                <path
+                  fill="currentColor"
+                  d="M0 0h48v48H0z"
+                  mask="url(#ipSCheckOne0)"
+                />
+              </svg>
+              }
+              <!--  -->
+              @if ( currentWeather()?.air?.components?.['no2']?.category ===
+              'moderate' || currentWeather()?.air?.components?.['no2']?.category
+              === 'poor' ) {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 2048 2048"
+                class="text-warning order-2 sm:order-none"
+              >
+                <path
+                  fill="currentColor"
+                  d="M1024 0q141 0 272 36t244 104t207 160t161 207t103 245t37 272q0 141-36 272t-104 244t-160 207t-207 161t-245 103t-272 37q-141 0-272-36t-244-104t-207-160t-161-207t-103-245t-37-272q0-141 36-272t104-244t160-207t207-161T752 37t272-37m128 1536v-256H896v256zm0-384V512H896v640z"
+                  stroke-width="51"
+                  stroke="currentColor"
+                />
+              </svg>
+              }
+              <!--  -->
+              @if ( currentWeather()?.air?.components?.['no2']?.category ===
+              'very poor' ) {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
@@ -653,8 +707,68 @@
                   stroke="currentColor"
                 />
               </svg>
-              <!-- WARNING ICON -->
-              <!-- <svg
+              }
+              <p class="font-bold text-lg">NO<sub>2</sub></p>
+            </div>
+            <div
+              class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
+            >
+              <span
+                class="text-lg"
+                >{{ currentWeather()?.air?.components?.['no2']?.value | number : '1.0-0' }}</span
+              >
+              <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
+            </div>
+          </div>
+        </div>
+        <!-- CARD -->
+        <div
+          class="border border-secondary-content/50 rounded-box p-3 bg-secondary"
+        >
+          <div
+            class="flex flex-col sm:flex-row items-center justify-between gap-[10px] sm:w-50 md:w-62 lg:w-97 xl:w-100"
+          >
+            <div
+              class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
+            >
+              @if ( currentWeather()?.air?.components?.['so2']?.category ===
+              'good' || currentWeather()?.air?.components?.['so2']?.category ===
+              'fair' ) {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 48 48"
+                class="text-success order-2 sm:order-none"
+              >
+                <defs>
+                  <mask id="ipSCheckOne0">
+                    <g fill="none" stroke-linejoin="round" stroke-width="4">
+                      <path
+                        fill="#fff"
+                        stroke="#fff"
+                        d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"
+                      />
+                      <path
+                        stroke="#000"
+                        stroke-linecap="round"
+                        d="m16 24l6 6l12-12"
+                      />
+                    </g>
+                  </mask>
+                </defs>
+                <path
+                  fill="currentColor"
+                  d="M0 0h48v48H0z"
+                  mask="url(#ipSCheckOne0)"
+                />
+              </svg>
+              }
+              <!--  -->
+              @if ( currentWeather()?.air?.components?.['so2']?.category ===
+              'moderate' || currentWeather()?.air?.components?.['so2']?.category
+              === 'poor' ) {
+              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
                 height="15"
@@ -667,89 +781,26 @@
                   stroke-width="51"
                   stroke="currentColor"
                 />
-              </svg> -->
-              <!-- NORMAL ICON -->
-              <!-- <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                viewBox="0 0 48 48"
-                class="text-success order-2 sm:order-none"
-              >
-                <defs>
-                  <mask id="ipSCheckOne0">
-                    <g fill="none" stroke-linejoin="round" stroke-width="4">
-                      <path
-                        fill="#fff"
-                        stroke="#fff"
-                        d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"
-                      />
-                      <path
-                        stroke="#000"
-                        stroke-linecap="round"
-                        d="m16 24l6 6l12-12"
-                      />
-                    </g>
-                  </mask>
-                </defs>
-                <path
-                  fill="currentColor"
-                  d="M0 0h48v48H0z"
-                  mask="url(#ipSCheckOne0)"
-                />
-              </svg> -->
-              <p class="font-bold text-lg">NO<sub>2</sub></p>
-            </div>
-            <div
-              class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
-            >
-              <span
-                class="text-lg"
-                >{{ currentWeather()?.air?.components?.['no2'] | number : '1.0-0' }}</span
-              >
-              <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
-            </div>
-          </div>
-        </div>
-        <!-- CARD -->
-        <div
-          class="border border-secondary-content/50 rounded-box p-3 bg-secondary"
-        >
-          <div
-            class="flex flex-col sm:flex-row items-center justify-between gap-[10px] sm:w-50 md:w-62 lg:w-97 xl:w-100"
-          >
-            <div
-              class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
-            >
+              </svg>
+              }
+              <!--  -->
+              @if ( currentWeather()?.air?.components?.['so2']?.category ===
+              'very poor' ) {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
                 height="15"
-                viewBox="0 0 48 48"
-                class="text-success order-2 sm:order-none"
+                viewBox="0 0 512 512"
+                class="text-error order-2 sm:order-none"
               >
-                <defs>
-                  <mask id="ipSCheckOne0">
-                    <g fill="none" stroke-linejoin="round" stroke-width="4">
-                      <path
-                        fill="#fff"
-                        stroke="#fff"
-                        d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"
-                      />
-                      <path
-                        stroke="#000"
-                        stroke-linecap="round"
-                        d="m16 24l6 6l12-12"
-                      />
-                    </g>
-                  </mask>
-                </defs>
                 <path
                   fill="currentColor"
-                  d="M0 0h48v48H0z"
-                  mask="url(#ipSCheckOne0)"
+                  d="M256 512a256 256 0 1 0 0-512a256 256 0 1 0 0 512m-89-345c9.4-9.4 24.6-9.4 33.9 0l55 55l55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55l55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55l-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55l-55-55c-9.4-9.4-9.4-24.6 0-33.9"
+                  stroke-width="13"
+                  stroke="currentColor"
                 />
               </svg>
+              }
               <p class="font-bold text-lg">SO<sub>2</sub></p>
             </div>
             <div
@@ -757,7 +808,7 @@
             >
               <span
                 class="text-lg"
-                >{{ currentWeather()?.air?.components?.['so2'] | number : '1.0-0' }}</span
+                >{{ currentWeather()?.air?.components?.['so2']?.value| number : '1.0-0' }}</span
               >
               <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
             </div>
@@ -773,6 +824,9 @@
             <div
               class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
             >
+              @if ( currentWeather()?.air?.components?.['pm2_5']?.category ===
+              'good' || currentWeather()?.air?.components?.['pm2_5']?.category
+              === 'fair' ) {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
@@ -802,6 +856,45 @@
                   mask="url(#ipSCheckOne0)"
                 />
               </svg>
+              }
+              <!--  -->
+              @if ( currentWeather()?.air?.components?.['pm2_5']?.category ===
+              'moderate' ||
+              currentWeather()?.air?.components?.['pm2_5']?.category === 'poor'
+              ) {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 2048 2048"
+                class="text-warning order-2 sm:order-none"
+              >
+                <path
+                  fill="currentColor"
+                  d="M1024 0q141 0 272 36t244 104t207 160t161 207t103 245t37 272q0 141-36 272t-104 244t-160 207t-207 161t-245 103t-272 37q-141 0-272-36t-244-104t-207-160t-161-207t-103-245t-37-272q0-141 36-272t104-244t160-207t207-161T752 37t272-37m128 1536v-256H896v256zm0-384V512H896v640z"
+                  stroke-width="51"
+                  stroke="currentColor"
+                />
+              </svg>
+              }
+              <!--  -->
+              @if ( currentWeather()?.air?.components?.['pm2_5']?.category ===
+              'very poor' ) {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 512 512"
+                class="text-error order-2 sm:order-none"
+              >
+                <path
+                  fill="currentColor"
+                  d="M256 512a256 256 0 1 0 0-512a256 256 0 1 0 0 512m-89-345c9.4-9.4 24.6-9.4 33.9 0l55 55l55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55l55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55l-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55l-55-55c-9.4-9.4-9.4-24.6 0-33.9"
+                  stroke-width="13"
+                  stroke="currentColor"
+                />
+              </svg>
+              }
               <p class="font-bold text-lg">PM<sub>2.5</sub></p>
             </div>
             <div
@@ -809,7 +902,7 @@
             >
               <span
                 class="text-lg"
-                >{{ currentWeather()?.air?.components?.['pm2_5'] | number : '1.0-0' }}</span
+                >{{ currentWeather()?.air?.components?.['pm2_5']?.value | number : '1.0-0' }}</span
               >
               <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
             </div>
@@ -825,6 +918,9 @@
             <div
               class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
             >
+              @if ( currentWeather()?.air?.components?.['pm10']?.category ===
+              'good' || currentWeather()?.air?.components?.['pm10']?.category
+              === 'fair' ) {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
@@ -854,6 +950,45 @@
                   mask="url(#ipSCheckOne0)"
                 />
               </svg>
+              }
+              <!--  -->
+              @if ( currentWeather()?.air?.components?.['pm10']?.category ===
+              'moderate' ||
+              currentWeather()?.air?.components?.['pm10']?.category === 'poor' )
+              {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 2048 2048"
+                class="text-warning order-2 sm:order-none"
+              >
+                <path
+                  fill="currentColor"
+                  d="M1024 0q141 0 272 36t244 104t207 160t161 207t103 245t37 272q0 141-36 272t-104 244t-160 207t-207 161t-245 103t-272 37q-141 0-272-36t-244-104t-207-160t-161-207t-103-245t-37-272q0-141 36-272t104-244t160-207t207-161T752 37t272-37m128 1536v-256H896v256zm0-384V512H896v640z"
+                  stroke-width="51"
+                  stroke="currentColor"
+                />
+              </svg>
+              }
+              <!--  -->
+              @if ( currentWeather()?.air?.components?.['pm10']?.category ===
+              'very poor' ) {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 512 512"
+                class="text-error order-2 sm:order-none"
+              >
+                <path
+                  fill="currentColor"
+                  d="M256 512a256 256 0 1 0 0-512a256 256 0 1 0 0 512m-89-345c9.4-9.4 24.6-9.4 33.9 0l55 55l55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55l55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55l-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55l-55-55c-9.4-9.4-9.4-24.6 0-33.9"
+                  stroke-width="13"
+                  stroke="currentColor"
+                />
+              </svg>
+              }
               <p class="font-bold text-lg">PM<sub>10</sub></p>
             </div>
             <div
@@ -861,7 +996,7 @@
             >
               <span
                 class="text-lg"
-                >{{ currentWeather()?.air?.components?.['pm10'] | number : '1.0-0' }}</span
+                >{{ currentWeather()?.air?.components?.['pm10']?.value | number : '1.0-0' }}</span
               >
               <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
             </div>
@@ -877,6 +1012,9 @@
             <div
               class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
             >
+              @if ( currentWeather()?.air?.components?.['o3']?.category ===
+              'good' || currentWeather()?.air?.components?.['o3']?.category ===
+              'fair' ) {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
@@ -906,6 +1044,44 @@
                   mask="url(#ipSCheckOne0)"
                 />
               </svg>
+              }
+              <!--  -->
+              @if ( currentWeather()?.air?.components?.['o3']?.category ===
+              'moderate' || currentWeather()?.air?.components?.['o3']?.category
+              === 'poor' ) {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 2048 2048"
+                class="text-warning order-2 sm:order-none"
+              >
+                <path
+                  fill="currentColor"
+                  d="M1024 0q141 0 272 36t244 104t207 160t161 207t103 245t37 272q0 141-36 272t-104 244t-160 207t-207 161t-245 103t-272 37q-141 0-272-36t-244-104t-207-160t-161-207t-103-245t-37-272q0-141 36-272t104-244t160-207t207-161T752 37t272-37m128 1536v-256H896v256zm0-384V512H896v640z"
+                  stroke-width="51"
+                  stroke="currentColor"
+                />
+              </svg>
+              }
+              <!--  -->
+              @if ( currentWeather()?.air?.components?.['o3']?.category ===
+              'very poor' ) {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 512 512"
+                class="text-error order-2 sm:order-none"
+              >
+                <path
+                  fill="currentColor"
+                  d="M256 512a256 256 0 1 0 0-512a256 256 0 1 0 0 512m-89-345c9.4-9.4 24.6-9.4 33.9 0l55 55l55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55l55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55l-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55l-55-55c-9.4-9.4-9.4-24.6 0-33.9"
+                  stroke-width="13"
+                  stroke="currentColor"
+                />
+              </svg>
+              }
               <p class="font-bold text-lg">O<sub>3</sub></p>
             </div>
             <div
@@ -913,7 +1089,7 @@
             >
               <span
                 class="text-lg"
-                >{{ currentWeather()?.air?.components?.['o3'] | number : '1.0-0' }}</span
+                >{{ currentWeather()?.air?.components?.['o3']?.value | number : '1.0-0' }}</span
               >
               <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
             </div>
@@ -929,6 +1105,9 @@
             <div
               class="flex flex-col sm:flex-row items-center justify-center sm:gap-[10px]"
             >
+              @if ( currentWeather()?.air?.components?.['co']?.category ===
+              'good' || currentWeather()?.air?.components?.['co']?.category ===
+              'fair' ) {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
@@ -958,6 +1137,44 @@
                   mask="url(#ipSCheckOne0)"
                 />
               </svg>
+              }
+              <!--  -->
+              @if ( currentWeather()?.air?.components?.['co']?.category ===
+              'moderate' || currentWeather()?.air?.components?.['co']?.category
+              === 'poor' ) {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 2048 2048"
+                class="text-warning order-2 sm:order-none"
+              >
+                <path
+                  fill="currentColor"
+                  d="M1024 0q141 0 272 36t244 104t207 160t161 207t103 245t37 272q0 141-36 272t-104 244t-160 207t-207 161t-245 103t-272 37q-141 0-272-36t-244-104t-207-160t-161-207t-103-245t-37-272q0-141 36-272t104-244t160-207t207-161T752 37t272-37m128 1536v-256H896v256zm0-384V512H896v640z"
+                  stroke-width="51"
+                  stroke="currentColor"
+                />
+              </svg>
+              }
+              <!--  -->
+              @if ( currentWeather()?.air?.components?.['co']?.category ===
+              'very poor' ) {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 512 512"
+                class="text-error order-2 sm:order-none"
+              >
+                <path
+                  fill="currentColor"
+                  d="M256 512a256 256 0 1 0 0-512a256 256 0 1 0 0 512m-89-345c9.4-9.4 24.6-9.4 33.9 0l55 55l55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55l55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55l-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55l-55-55c-9.4-9.4-9.4-24.6 0-33.9"
+                  stroke-width="13"
+                  stroke="currentColor"
+                />
+              </svg>
+              }
               <p class="font-bold text-lg">CO</p>
             </div>
             <div
@@ -965,7 +1182,7 @@
             >
               <span
                 class="text-lg"
-                >{{ currentWeather()?.air?.components?.['co'] | number : '1.0-0' }}</span
+                >{{ currentWeather()?.air?.components?.['co']?.value | number : '1.0-0' }}</span
               >
               <p class="text-lg text-secondary-content">µg/m<sup>3</sup></p>
             </div>
@@ -983,25 +1200,13 @@
     >
       <h2 class="font-semibold text-xl sm:hidden">Weather Insight</h2>
 
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="50"
-        height="50"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="#2d3748"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="lucide lucide-cloud-sun-icon lucide-cloud-sun shrink-0"
-      >
-        <path d="M12 2v2" />
-        <path d="m4.93 4.93 1.41 1.41" />
-        <path d="M20 12h2" />
-        <path d="m19.07 4.93-1.41 1.41" />
-        <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
-        <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
-      </svg>
+      <div class="w-fit h-fit">
+        <img
+          class="w-15 h-15"
+          [src]="currentWeather()?.weather?.icon"
+          [alt]="`${currentWeather()?.weather?.description} icon`"
+        />
+      </div>
       <div class="w-full">
         <h2 class="hidden sm:block sm:font-semibold sm:text-xl">
           Weather Insight

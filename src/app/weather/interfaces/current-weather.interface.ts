@@ -27,5 +27,10 @@ export interface Weather {
 
 export interface AirQuality {
   aqi: number;
-  components: { [key: string]: number };
+  components: { [key: string]: AirQualityComponent };
+}
+
+export interface AirQualityComponent {
+  value: number;
+  category: string;
 }
