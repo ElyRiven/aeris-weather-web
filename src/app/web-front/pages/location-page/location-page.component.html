@@ -1212,7 +1212,7 @@
           Weather Insight
         </h2>
         <p class="text-lg text-center sm:text-left">
-          Today's weather is rainy and cloudy.
+          {{ weatherUtils.getWeatherInsight(currentWeather()?.weather) }}
         </p>
       </div>
     </div>
