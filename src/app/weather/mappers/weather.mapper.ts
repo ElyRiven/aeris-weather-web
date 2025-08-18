@@ -12,6 +12,7 @@ export class WeatherMapper {
       temp: weatherResponse.main.temp,
       icon: `${ICON_URL}/${weatherResponse.weather[0].icon}@2x.png`,
       feels_like: weatherResponse.main.feels_like,
+      mainWeather: weatherResponse.weather[0].main,
       description: weatherResponse.weather[0].description,
       temp_min: weatherResponse.main.temp_min,
       temp_max: weatherResponse.main.temp_max,

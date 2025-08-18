@@ -11,6 +11,7 @@ export interface Weather {
   temp: number;
   icon: string;
   feels_like: number;
+  mainWeather: string;
   description: string;
   temp_min: number;
   temp_max: number;

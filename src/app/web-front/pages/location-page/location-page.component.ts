@@ -22,18 +22,18 @@ import { AirDescriptionPipe } from '@weather/pipes/aqi-description.pipe';
 
 import { AirQualityUtils } from '@weather/utils/air-quality-utils';
 import { WeatherUtils } from '@weather/utils/weather-utils';
+import { MainWeatherSectionComponent } from './main-weather-section/main-weather-section.component';
 
 @Component({
   selector: 'location-page',
   imports: [
-    TemperaturePipe,
     TitleCasePipe,
-    TimePipe,
     DecimalPipe,
     WindDirectionPipe,
     VisibilityPipe,
     AirTextPipe,
     AirDescriptionPipe,
+    MainWeatherSectionComponent,
   ],
   templateUrl: './location-page.component.html',
 })
@@ -45,17 +45,10 @@ export class LocationPageComponent {
   public airUtils = AirQualityUtils;
   public weatherUtils = WeatherUtils;
 
-  public temperatureUnit = signal<'c' | 'f'>('c');
-
   public defaultLocation = signal<UserLocation | undefined>(undefined);
   public preciseLocation = signal<UserLocation | undefined>(undefined);
 
   public currentWeather = signal<CurrentWeather | undefined>(undefined);
-
-  toggleUnit(event: Event): void {
-    const tempInput = event.target as HTMLInputElement;
-    this.temperatureUnit.set(tempInput.checked ? 'f' : 'c');
-  }
 
   defaultGeolocationRx = rxResource({
     loader: () => this.#geolocationService.getDefaultGeolocation(),
