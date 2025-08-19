@@ -12,11 +12,10 @@ import { CurrentWeatherService } from '@weather/services/current-weather.service
 
 import { CurrentWeatherMapper } from '@weather/mappers/current-weather.mapper';
 
-import { WeatherUtils } from '@weather/utils/weather-utils';
-
 import { MainWeatherSectionComponent } from './main-weather-section/main-weather-section.component';
 import { SecondaryWeatherSectionComponent } from './secondary-weather-section/secondary-weather-section.component';
 import { AirQualitySectionComponent } from './air-quality-section/air-quality-section.component';
+import { WeatherInsightSectionComponent } from './weather-insight-section/weather-insight-section.component';
 
 @Component({
   selector: 'location-page',
@@ -24,6 +23,7 @@ import { AirQualitySectionComponent } from './air-quality-section/air-quality-se
     MainWeatherSectionComponent,
     SecondaryWeatherSectionComponent,
     AirQualitySectionComponent,
+    WeatherInsightSectionComponent,
   ],
   templateUrl: './location-page.component.html',
 })
@@ -31,8 +31,6 @@ export class LocationPageComponent {
   #geolocationService = inject(GeolocationService);
   #weatherService = inject(CurrentWeatherService);
   #airService = inject(AirQualityService);
-
-  public weatherUtils = WeatherUtils;
 
   public defaultLocation = signal<UserLocation | undefined>(undefined);
   public preciseLocation = signal<UserLocation | undefined>(undefined);

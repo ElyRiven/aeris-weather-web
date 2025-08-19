@@ -8,30 +8,5 @@
 
   <air-quality-section [airQuality]="currentWeather()?.air" />
 
-  <!-- WEATHER INSIGHT SECTION -->
-  <section
-    class="w-full max-w-full h-fit border border-secondary-content/50 rounded-box bg-linear-(--description-gradient) py-6"
-  >
-    <div
-      class="flex flex-col sm:flex-row items-center justify-start gap-5 w-40 xs:w-58 sm:w-105 md:w-130 lg:w-200 xl:w-225 mx-auto"
-    >
-      <h2 class="font-semibold text-xl sm:hidden">Weather Insight</h2>
-
-      <div class="w-fit h-fit">
-        <img
-          class="w-15 h-15"
-          [src]="currentWeather()?.weather?.icon"
-          [alt]="`${currentWeather()?.weather?.description} icon`"
-        />
-      </div>
-      <div class="w-full">
-        <h2 class="hidden sm:block sm:font-semibold sm:text-xl">
-          Weather Insight
-        </h2>
-        <p class="text-lg text-center sm:text-left">
-          {{ weatherUtils.getWeatherInsight(currentWeather()?.weather) }}
-        </p>
-      </div>
-    </div>
-  </section>
+  <weather-insight-section [currentWeather]="currentWeather()?.weather" />
 </div>
