@@ -23,17 +23,17 @@ import { AirDescriptionPipe } from '@weather/pipes/aqi-description.pipe';
 import { AirQualityUtils } from '@weather/utils/air-quality-utils';
 import { WeatherUtils } from '@weather/utils/weather-utils';
 import { MainWeatherSectionComponent } from './main-weather-section/main-weather-section.component';
+import { SecondaryWeatherSectionComponent } from './secondary-weather-section/secondary-weather-section.component';
 
 @Component({
   selector: 'location-page',
   imports: [
     TitleCasePipe,
     DecimalPipe,
-    WindDirectionPipe,
-    VisibilityPipe,
     AirTextPipe,
     AirDescriptionPipe,
     MainWeatherSectionComponent,
+    SecondaryWeatherSectionComponent,
   ],
   templateUrl: './location-page.component.html',
 })
@@ -123,23 +123,4 @@ export class LocationPageComponent {
       });
     }
   });
-
-  getWindDirectionClass(degrees: number | undefined): string {
-    if (!degrees) return '';
-
-    const directionClassesArray = [
-      '-rotate-45',
-      'rotate-0',
-      'rotate-45',
-      'rotate-90',
-      'rotate-135',
-      'rotate-180',
-      '-rotate-135',
-      '-rotate-90',
-    ];
-
-    const index = Math.round(degrees / 45) % 8;
-
-    return directionClassesArray[index];
-  }
 }
