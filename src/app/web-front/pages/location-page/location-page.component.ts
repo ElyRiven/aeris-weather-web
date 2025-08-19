@@ -1,4 +1,3 @@
-import { DecimalPipe, KeyValuePipe, TitleCasePipe } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 
 import { rxResource } from '@angular/core/rxjs-interop';
@@ -13,27 +12,18 @@ import { CurrentWeatherService } from '@weather/services/current-weather.service
 
 import { CurrentWeatherMapper } from '@weather/mappers/current-weather.mapper';
 
-import { TemperaturePipe } from '@weather/pipes/temperature.pipe';
-import { TimePipe } from '@weather/pipes/time.pipe';
-import { WindDirectionPipe } from '@weather/pipes/wind-direction.pipe';
-import { VisibilityPipe } from '@weather/pipes/visibility.pipe';
-import { AirTextPipe } from '@weather/pipes/aqi-text.pipe';
-import { AirDescriptionPipe } from '@weather/pipes/aqi-description.pipe';
-
-import { AirQualityUtils } from '@weather/utils/air-quality-utils';
 import { WeatherUtils } from '@weather/utils/weather-utils';
+
 import { MainWeatherSectionComponent } from './main-weather-section/main-weather-section.component';
 import { SecondaryWeatherSectionComponent } from './secondary-weather-section/secondary-weather-section.component';
+import { AirQualitySectionComponent } from './air-quality-section/air-quality-section.component';
 
 @Component({
   selector: 'location-page',
   imports: [
-    TitleCasePipe,
-    DecimalPipe,
-    AirTextPipe,
-    AirDescriptionPipe,
     MainWeatherSectionComponent,
     SecondaryWeatherSectionComponent,
+    AirQualitySectionComponent,
   ],
   templateUrl: './location-page.component.html',
 })
@@ -42,7 +32,6 @@ export class LocationPageComponent {
   #weatherService = inject(CurrentWeatherService);
   #airService = inject(AirQualityService);
 
-  public airUtils = AirQualityUtils;
   public weatherUtils = WeatherUtils;
 
   public defaultLocation = signal<UserLocation | undefined>(undefined);

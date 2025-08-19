@@ -1,6 +1,8 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { Weather } from '@weather/interfaces/current-weather.interface';
+
+import type { Weather } from '@weather/interfaces/current-weather.interface';
+
 import { VisibilityPipe } from '@weather/pipes/visibility.pipe';
 import { WindDirectionPipe } from '@weather/pipes/wind-direction.pipe';
 
