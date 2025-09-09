@@ -22,7 +22,10 @@ export class WeatherMapper {
       snow: weatherResponse.snow?.['1h'],
       humidity: weatherResponse.main.humidity,
       pressure: weatherResponse.main.pressure,
-      wind: weatherResponse.wind,
+      wind: {
+        ...weatherResponse.wind,
+        deg: (weatherResponse.wind.deg + 180) % 360,
+      },
       visibility: weatherResponse.visibility,
       clouds: weatherResponse.clouds.all,
     };

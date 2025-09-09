@@ -26,15 +26,8 @@ export class AirQualityUtils {
 
     if (!ranges) return '';
 
-    for (let i = 0; i < ranges.length; i++) {
-      if (value <= ranges[i]) {
-        console.log('Categoria encontrada', categories[i]);
-
-        return categories[i];
-      }
-    }
-
-    console.log('Peor categoría', categories[ranges.length]);
+    for (let i = 0; i < ranges.length; i++)
+      return value <= ranges[i] ? categories[i] : '';
 
     return categories[ranges.length];
   }
