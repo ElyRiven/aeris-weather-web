@@ -1,15 +1,9 @@
 import { Component, signal } from '@angular/core';
+import { TitleSectionComponent } from './title-section/title-section.component';
 
 @Component({
   selector: 'forecast-page',
-  imports: [],
+  imports: [TitleSectionComponent],
   templateUrl: './forecast-page.component.html',
 })
-export class ForecastPageComponent {
-  public temperatureUnit = signal<'c' | 'f'>('c');
-
-  toggleUnit(event: Event): void {
-    const tempInput = event.target as HTMLInputElement;
-    this.temperatureUnit.set(tempInput.checked ? 'f' : 'c');
-  }
-}
+export class ForecastPageComponent {}
