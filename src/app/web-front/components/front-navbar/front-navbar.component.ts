@@ -1,9 +1,10 @@
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Component, signal } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'front-navbar',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './front-navbar.component.html',
   animations: [
     trigger('menuAnimation', [

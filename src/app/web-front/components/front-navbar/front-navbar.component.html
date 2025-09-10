@@ -6,8 +6,18 @@
     <a href="">
       <img src="/assets/images/aeris-title.png" alt="Aeris Web Title" />
     </a>
-    <button class="hidden md:btn md:btn-accent">Current Weather</button>
-    <button class="hidden md:btn md:btn-accent">5-day Forecast</button>
+    <a
+      routerLink="/location"
+      routerLinkActive="md:btn-active"
+      class="hidden md:btn md:btn-accent"
+      >Current Weather</a
+    >
+    <a
+      routerLink="/forecast"
+      routerLinkActive="md:btn-active"
+      class="hidden md:btn md:btn-accent"
+      >5-day Forecast</a
+    >
     <form class="flex-grow">
       <label class="input input-accent bg-base-100 w-full">
         <svg
@@ -68,8 +78,18 @@
       class="p-2 w-fit absolute top-17 right-1 bg-accent rounded-box md:hidden"
     >
       <div class="flex flex-col gap-2 items-center justify-center">
-        <button class="btn btn-accent w-full">Current Weather</button>
-        <button class="btn btn-accent w-full">5-day Forecast</button>
+        <a
+          routerLink="/location"
+          routerLinkActive="btn-active"
+          class="btn btn-accent w-full"
+          >Current Weather</a
+        >
+        <a
+          routerLink="/forecast"
+          routerLinkActive="btn-active"
+          class="btn btn-accent w-full"
+          >5-day Forecast</a
+        >
       </div>
     </div>
     }
