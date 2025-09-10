@@ -1,0 +1,26 @@
+<div class="flex flex-col gap-7 sm:gap-10">
+  <!-- TEMPERATURE SELECTOR -->
+  <div class="relative transition-all">
+    <div
+      class="flex flex-row w-fit sm:items-center sm:justify-center gap-[10px] relative sm:absolute left-4"
+    >
+      <span
+        [class]="{ 'text-secondary-content/50': temperatureUnit() === 'f' }"
+        class="font-semibold text-base sm:text-lg md:text-xl"
+        >ºC</span
+      >
+      <input
+        type="checkbox"
+        class="toggle toggle-sm sm:toggle-md lg:toggle-lg checked:bg-transparent text-primary-content"
+        (change)="toggleUnit($event)"
+      />
+      <span
+        [class]="{ 'text-secondary-content/50': temperatureUnit() === 'c' }"
+        class="font-semibold text-base sm:text-lg md:text-xl"
+        >ºF</span
+      >
+    </div>
+  </div>
+
+  <h1>FORECAST PAGE</h1>
+</div>

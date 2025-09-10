@@ -20,8 +20,6 @@ const RAINY_CONDITIONS = [
   'tornado',
 ];
 
-// const DEFAULT_CONDITIONS = [ 'clear','drizzle' ];
-
 @Component({
   selector: 'main-weather-section',
   imports: [TemperaturePipe, TitleCasePipe, TimePipe],
