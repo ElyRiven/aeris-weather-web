@@ -24,6 +24,12 @@ export class GeolocationService {
   #defaultLocation = signal<UserLocation | undefined>(undefined);
   #preciseLocation = signal<UserLocation | undefined>(undefined);
 
+  hasLocation(): boolean {
+    if (this.#defaultLocation() || this.#preciseLocation()) return true;
+
+    return false;
+  }
+
   defaultLocationValue(): UserLocation | undefined {
     return this.#defaultLocation();
   }

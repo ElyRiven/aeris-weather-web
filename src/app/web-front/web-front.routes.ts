@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
-import { WebFrontLayoutComponent } from './layouts/web-front-layout/web-front-layout.component';
+
 import { LocationPageComponent } from './pages/location-page/location-page.component';
 import { ForecastPageComponent } from './pages/forecast-page/forecast-page.component';
+import { WebFrontLayoutComponent } from './layouts/web-front-layout/web-front-layout.component';
+import { MissingLocationGuard } from '@shared/guards/missing-location.guard';
 
 export const WebFrontRoutes: Routes = [
   {
@@ -15,6 +17,7 @@ export const WebFrontRoutes: Routes = [
       {
         path: 'forecast',
         component: ForecastPageComponent,
+        canMatch: [MissingLocationGuard],
       },
       {
         path: '**',
