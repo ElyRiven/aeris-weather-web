@@ -6,6 +6,8 @@
     <h2 class="text-3xl font-bold sm:w-80 md:w-90 lg:w-fit">
       Weather Forecast for 5 days
     </h2>
-    <p>Quito, EC</p>
+    <p class="text-xl text-secondary-content">
+      {{ currentLocation().location }}, {{ currentLocation().country }}
+    </p>
   </div>
 </section>

@@ -1,5 +1,5 @@
 import { UserLocation } from '@front/interfaces/location.interface';
-import { Clouds, Rain, Snow, Wind } from './api-weather-response.interface';
+import { Wind } from './api-weather-response.interface';
 
 export interface CurrentWeather {
   location: UserLocation;

@@ -1,4 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, input } from '@angular/core';
+
+import type { UserLocation } from '@front/interfaces/location.interface';
 import { TemperatureSelectorComponent } from '@shared/components/temperature-selector/temperature-selector.component';
 
 @Component({
@@ -6,4 +8,6 @@ import { TemperatureSelectorComponent } from '@shared/components/temperature-sel
   imports: [TemperatureSelectorComponent],
   templateUrl: './title-section.component.html',
 })
-export class TitleSectionComponent {}
+export class TitleSectionComponent {
+  public currentLocation = input.required<UserLocation>();
+}

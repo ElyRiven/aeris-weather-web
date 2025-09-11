@@ -1,9 +1,7 @@
 import { Component, effect, inject, signal } from '@angular/core';
 
-import { rxResource } from '@angular/core/rxjs-interop';
 import { forkJoin } from 'rxjs';
 
-import type { UserLocation } from '@front/interfaces/location.interface';
 import type { CurrentWeather } from '@weather/interfaces/current-weather.interface';
 
 import { GeolocationService } from '@geolocation/services/geolocation.service';
