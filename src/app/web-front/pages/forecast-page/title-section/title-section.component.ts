@@ -1,15 +1,9 @@
 import { Component, signal } from '@angular/core';
+import { TemperatureSelectorComponent } from '@shared/components/temperature-selector/temperature-selector.component';
 
 @Component({
   selector: 'title-section',
-  imports: [],
+  imports: [TemperatureSelectorComponent],
   templateUrl: './title-section.component.html',
 })
-export class TitleSectionComponent {
-  public temperatureUnit = signal<'c' | 'f'>('c');
-
-  toggleUnit(event: Event): void {
-    const tempInput = event.target as HTMLInputElement;
-    this.temperatureUnit.set(tempInput.checked ? 'f' : 'c');
-  }
-}
+export class TitleSectionComponent {}

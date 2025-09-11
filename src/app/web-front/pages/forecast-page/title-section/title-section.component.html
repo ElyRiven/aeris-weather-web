@@ -1,30 +1,11 @@
 <section class="w-full h-fit py-8 rounded-box">
-  <!-- TEMPERATURE SELECTOR -->
-  <div class="relative transition-all">
-    <div
-      class="flex flex-row w-fit sm:items-center sm:justify-center gap-[10px] relative sm:absolute left-4"
-    >
-      <span
-        [class]="{ 'text-secondary-content/50': temperatureUnit() === 'f' }"
-        class="font-semibold text-base sm:text-lg md:text-xl"
-        >ºC</span
-      >
-      <input
-        type="checkbox"
-        class="toggle toggle-sm sm:toggle-md lg:toggle-lg checked:bg-transparent text-primary-content"
-        (change)="toggleUnit($event)"
-      />
-      <span
-        [class]="{ 'text-secondary-content/50': temperatureUnit() === 'c' }"
-        class="font-semibold text-base sm:text-lg md:text-xl"
-        >ºF</span
-      >
-    </div>
-  </div>
+  <temperature-selector />
 
   <!-- SECTION TITLE -->
-  <div class="flex flex-col items-center justify-center gap-3">
-    <h2 class="text-3xl font-bold">Weather Forecast for 5 days</h2>
+  <div class="flex flex-col items-center justify-center gap-3 text-center">
+    <h2 class="text-3xl font-bold sm:w-80 md:w-90 lg:w-fit">
+      Weather Forecast for 5 days
+    </h2>
     <p>Quito, EC</p>
   </div>
 </section>
