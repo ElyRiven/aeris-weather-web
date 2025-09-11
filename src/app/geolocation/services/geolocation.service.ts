@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { effect, inject, Injectable, signal } from '@angular/core';
 
 import { catchError, map, Observable, throwError } from 'rxjs';
 
@@ -11,6 +11,7 @@ import type { GeolocationResponse } from '@geolocation/interfaces/geolocation-re
 import type { DefaultGeolocation } from '@geolocation/interfaces/ipapi-resp.interface';
 import { GeolocationMapper } from '@geolocation/mappers/geolocation.mapper';
 import { environment } from 'src/environments/environment';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 const IPAPI_URL = 'http://ip-api.com/json/';
 const GEOLOCATION_API_URL = 'https://api.openweathermap.org/geo';
@@ -20,13 +21,22 @@ const GEOLOCATION_API_KEY = environment.openweatherkey;
 @Injectable({ providedIn: 'root' })
 export class GeolocationService {
   #http = inject(HttpClient);
+  #defaultLocation = signal<UserLocation | undefined>(undefined);
+  #preciseLocation = signal<UserLocation | undefined>(undefined);
+
+  defaultLocationValue(): UserLocation | undefined {
+    return this.#defaultLocation();
+  }
+
+  preciseLocationValue(): UserLocation | undefined {
+    return this.#preciseLocation();
+  }
 
   // TODO: Implement Direct Geolocation Call
   // getDirectGeolocation(query: string): Observable<UserLocation> {
   //   return this.#http.get<GeolocationResponse[]>(`${GEOLOCATION_API_URL}/${API_VERSION}`)
   // }
 
-  // TODO: Implement Reverse Geolocation Call
   // * OpenWeather Reverse Geolocation Call
   getReverseGeolocation(lat: number, lon: number): Observable<UserLocation> {
     return this.#http
@@ -73,7 +83,7 @@ export class GeolocationService {
   }
 
   //* Precise Browser Location Call
-  getPreciseUserLocation(): Observable<Coordinates | undefined> {
+  getPreciseGeolocation(): Observable<Coordinates | undefined> {
     return new Observable((observer) => {
       if (!navigator.geolocation) {
         observer.error('Geolocation is not supported on your browser');
@@ -100,4 +110,33 @@ export class GeolocationService {
       );
     });
   }
+
+  defaultGeolocationRx = rxResource({
+    loader: () => this.getDefaultGeolocation(),
+  });
+
+  preciseGeolocationRx = rxResource({
+    loader: () => this.getPreciseGeolocation(),
+  });
+
+  defaultLocationAssignemtEffect = effect(() => {
+    const defaultLocation = this.defaultGeolocationRx.value();
+
+    if (!defaultLocation) return;
+
+    this.#defaultLocation.set(defaultLocation);
+  });
+
+  preciseLocationAssignemtEffect = effect(() => {
+    const preciseLocation = this.preciseGeolocationRx.value();
+
+    if (!preciseLocation) return;
+
+    this.getReverseGeolocation(
+      preciseLocation!.lat,
+      preciseLocation!.lon
+    ).subscribe((preciseLocation) => {
+      this.#preciseLocation.set(preciseLocation);
+    });
+  });
 }

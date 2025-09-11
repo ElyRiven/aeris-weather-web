@@ -32,31 +32,14 @@ export class LocationPageComponent {
   #weatherService = inject(CurrentWeatherService);
   #airService = inject(AirQualityService);
 
-  public defaultLocation = signal<UserLocation | undefined>(undefined);
-  public preciseLocation = signal<UserLocation | undefined>(undefined);
-
   public currentWeather = signal<CurrentWeather | undefined>(undefined);
 
-  defaultGeolocationRx = rxResource({
-    loader: () => this.#geolocationService.getDefaultGeolocation(),
-  });
-
-  preciseGeolocationRx = rxResource({
-    loader: () => this.#geolocationService.getPreciseUserLocation(),
-  });
-
-  defaultLocationAssignemtEffect = effect(() => {
-    const defaultLocation = this.defaultGeolocationRx.value();
+  defaultWeatherEffect = effect(() => {
+    const defaultLocation = this.#geolocationService.defaultLocationValue();
 
     if (!defaultLocation) return;
 
-    this.defaultLocation.set(defaultLocation);
-  });
-
-  defaultWeatherEffect = effect(() => {
-    if (!this.defaultLocation()) return;
-
-    const { lat, lon } = this.defaultLocation()!;
+    const { lat, lon } = defaultLocation!;
 
     forkJoin({
       weather: this.#weatherService.getCurrentWeather(lat, lon),
@@ -66,27 +49,15 @@ export class LocationPageComponent {
         CurrentWeatherMapper.mapWeatherAirLocationToCurrentWeather(
           weather,
           air,
-          this.defaultLocation()!
+          defaultLocation
         );
       this.currentWeather.set(mappedWeather);
     });
   });
 
-  reverseGeolocationEffect = effect(() => {
-    const preciseLocation = this.preciseGeolocationRx.value();
-
-    if (!preciseLocation) return;
-
-    this.#geolocationService
-      .getReverseGeolocation(preciseLocation!.lat, preciseLocation!.lon)
-      .subscribe((preciseLocation) => {
-        this.preciseLocation.set(preciseLocation);
-      });
-  });
-
   compareLocationsEffect = effect(() => {
-    const preciseLocation = this.preciseLocation();
-    const defaultLocation = this.defaultLocation();
+    const preciseLocation = this.#geolocationService.preciseLocationValue();
+    const defaultLocation = this.#geolocationService.defaultLocationValue();
 
     if (!preciseLocation || !defaultLocation) return;
 
@@ -94,7 +65,7 @@ export class LocationPageComponent {
       defaultLocation!.location.toLowerCase() !==
       preciseLocation!.location.toLowerCase()
     ) {
-      const { lat, lon } = this.preciseLocation()!;
+      const { lat, lon } = preciseLocation;
 
       forkJoin({
         weather: this.#weatherService.getCurrentWeather(lat, lon),
@@ -104,7 +75,7 @@ export class LocationPageComponent {
           CurrentWeatherMapper.mapWeatherAirLocationToCurrentWeather(
             weather,
             air,
-            this.preciseLocation()!
+            preciseLocation
           );
         this.currentWeather.set(mappedWeather);
       });
