@@ -8,11 +8,10 @@ import { TitleSectionComponent } from './title-section/title-section.component';
 import { ForecastCardComponent } from './forecast-card/forecast-card.component';
 import { GeolocationService } from '@geolocation/services/geolocation.service';
 import { ForecastService } from '@weather/services/forecast-weather.service';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'forecast-page',
-  imports: [TitleSectionComponent, ForecastCardComponent, JsonPipe],
+  imports: [TitleSectionComponent, ForecastCardComponent],
   templateUrl: './forecast-page.component.html',
 })
 export class ForecastPageComponent {

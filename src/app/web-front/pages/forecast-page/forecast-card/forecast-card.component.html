@@ -1,211 +1,230 @@
-<section
-  class="w-full h-fit border border-secondary-content/50 rounded-box bg-secondary"
->
-  <!-- FORECAST GRID -->
-  <div
-    class="grid grid-cols-8 items-center justify-center gap-13 mx-18 my-9 text-secondary-content"
+<div class="flex flex-col gap-5">
+  @for (forecastItem of forecast()?.days; track $index; let even = $even ) {
+  <a
+    class="block w-full h-fit border border-secondary-content/50 rounded-box cursor-pointer"
+    [class]="even ? 'bg-secondary' : 'bg-accent'"
   >
-    <div class="flex flex-col col-span-2 justify-center gap-4">
-      <!-- HEADER -->
-      <p class="text-primary-content text-lg font-bold">Monday, 1 July</p>
-      <!-- CONTENT -->
-      <div class="flex flex-row gap-4">
-        <!-- DAYTIME -->
-        <div class="flex flex-col justify-center gap-4">
-          <p>Morning</p>
-          <p>Afternoon</p>
-          <p>Evening</p>
-          <p>Night</p>
+    <!-- FORECAST GRID -->
+    <div
+      class="grid grid-cols-8 items-center justify-center gap-13 mx-18 my-9 text-secondary-content"
+    >
+      <div class="flex flex-col col-span-2 justify-center gap-4">
+        <!-- HEADER -->
+        <p class="text-primary-content text-lg font-bold">
+          {{ forecastItem.date | date : "EEEE, d MMMM" }}
+        </p>
+        <!-- CONTENT -->
+        <div class="flex flex-row gap-4">
+          <!-- DAYTIME -->
+          <div class="flex flex-col justify-center gap-4">
+            <p>Morning</p>
+            <p>Afternoon</p>
+            <p>Evening</p>
+            <p>Night</p>
+          </div>
+          <!-- TEMPERATURE -->
+          <div class="flex flex-col justify-center gap-4 text-primary-content">
+            <p>
+              {{ getWeatherProperty(forecastItem.list, "temp", "morning")
+              }}<span>°</span>
+            </p>
+            <p>
+              {{ getWeatherProperty(forecastItem.list, "temp", "afternoon")
+              }}<span>°</span>
+            </p>
+            <p>
+              {{ getWeatherProperty(forecastItem.list, "temp", "evening")
+              }}<span>°</span>
+            </p>
+            <p>
+              {{ getWeatherProperty(forecastItem.list, "temp", "night")
+              }}<span>°</span>
+            </p>
+          </div>
+          <!-- WEATHER ICONS -->
+          <div
+            class="flex flex-col justify-center gap-4 text-primary-content w-fit h-fit"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-cloud-icon lucide-cloud"
+            >
+              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-cloud-drizzle-icon lucide-cloud-drizzle"
+            >
+              <path
+                d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"
+              />
+              <path d="M8 19v1" />
+              <path d="M8 14v1" />
+              <path d="M16 19v1" />
+              <path d="M16 14v1" />
+              <path d="M12 21v1" />
+              <path d="M12 16v1" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-cloud-moon-icon lucide-cloud-moon"
+            >
+              <path d="M13 16a3 3 0 0 1 0 6H7a5 5 0 1 1 4.9-6z" />
+              <path
+                d="M18.376 14.512a6 6 0 0 0 3.461-4.127c.148-.625-.659-.97-1.248-.714a4 4 0 0 1-5.259-5.26c.255-.589-.09-1.395-.716-1.248a6 6 0 0 0-4.594 5.36"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-cloud-sun-icon lucide-cloud-sun"
+            >
+              <path d="M12 2v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="M20 12h2" />
+              <path d="m19.07 4.93-1.41 1.41" />
+              <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+              <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
+            </svg>
+          </div>
         </div>
-        <!-- TEMPERATURE -->
-        <div class="flex flex-col justify-center gap-4 text-primary-content">
-          <p>20<span>°</span></p>
-          <p>26<span>°</span></p>
-          <p>18<span>°</span></p>
-          <p>11<span>°</span></p>
-        </div>
-        <!-- WEATHER ICONS -->
-        <div
-          class="flex flex-col justify-center gap-4 text-primary-content w-fit h-fit"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="23"
-            height="23"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-cloud-icon lucide-cloud"
-          >
-            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="23"
-            height="23"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-cloud-drizzle-icon lucide-cloud-drizzle"
-          >
-            <path
-              d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"
-            />
-            <path d="M8 19v1" />
-            <path d="M8 14v1" />
-            <path d="M16 19v1" />
-            <path d="M16 14v1" />
-            <path d="M12 21v1" />
-            <path d="M12 16v1" />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="23"
-            height="23"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-cloud-moon-icon lucide-cloud-moon"
-          >
-            <path d="M13 16a3 3 0 0 1 0 6H7a5 5 0 1 1 4.9-6z" />
-            <path
-              d="M18.376 14.512a6 6 0 0 0 3.461-4.127c.148-.625-.659-.97-1.248-.714a4 4 0 0 1-5.259-5.26c.255-.589-.09-1.395-.716-1.248a6 6 0 0 0-4.594 5.36"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="23"
-            height="23"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-cloud-sun-icon lucide-cloud-sun"
-          >
-            <path d="M12 2v2" />
-            <path d="m4.93 4.93 1.41 1.41" />
-            <path d="M20 12h2" />
-            <path d="m19.07 4.93-1.41 1.41" />
-            <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
-            <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
-          </svg>
+      </div>
+      <div class="flex flex-col gap-4 text-primary-content">
+        <p class="text-secondary-content">feels like</p>
+        <p>18<span>°</span></p>
+        <p>20<span>°</span></p>
+        <p>10<span>°</span></p>
+        <p>08<span>°</span></p>
+      </div>
+      <div class="flex flex-col gap-4 text-primary-content">
+        <p class="text-secondary-content">humidity</p>
+        <p>45<span>%</span></p>
+        <p>49<span>%</span></p>
+        <p>52<span>%</span></p>
+        <p>30<span>%</span></p>
+      </div>
+      <div class="flex flex-col gap-4 text-primary-content">
+        <p class="text-secondary-content">pressure, mmhg</p>
+        <p>1500</p>
+        <p>1485</p>
+        <p>1492</p>
+        <p>1443</p>
+      </div>
+      <div class="flex flex-col gap-4 text-primary-content">
+        <p class="text-secondary-content">visibility, km</p>
+        <p>10</p>
+        <p>5</p>
+        <p>2</p>
+        <p>3</p>
+      </div>
+      <div class="flex flex-col gap-4 text-primary-content">
+        <p class="text-secondary-content">cloudiness</p>
+        <p>51<span>%</span></p>
+        <p>55<span>%</span></p>
+        <p>61<span>%</span></p>
+        <p>49<span>%</span></p>
+      </div>
+      <div class="flex flex-col gap-4 text-primary-content">
+        <p class="text-secondary-content">wind, m/s</p>
+        <div class="flex flex-row gap-4">
+          <div class="flex flex-col gap-4">
+            <p>51<span>%</span></p>
+            <p>55<span>%</span></p>
+            <p>61<span>%</span></p>
+            <p>49<span>%</span></p>
+          </div>
+          <div class="flex flex-col gap-4 text-secondary-content">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              viewBox="0 0 14 14"
+              class="shrink-0"
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M1.25 7a5.75 5.75 0 1 1 11.5 0a5.75 5.75 0 0 1-11.5 0M7 0a7 7 0 1 0 0 14A7 7 0 0 0 7 0m2.854 4.146a.5.5 0 0 1 .12.512l-2 6a.5.5 0 0 1-.903.1L5.636 8.363L3.243 6.93a.5.5 0 0 1 .099-.903l6-2a.5.5 0 0 1 .512.12"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              viewBox="0 0 14 14"
+              class="shrink-0 rotate-45"
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M1.25 7a5.75 5.75 0 1 1 11.5 0a5.75 5.75 0 0 1-11.5 0M7 0a7 7 0 1 0 0 14A7 7 0 0 0 7 0m2.854 4.146a.5.5 0 0 1 .12.512l-2 6a.5.5 0 0 1-.903.1L5.636 8.363L3.243 6.93a.5.5 0 0 1 .099-.903l6-2a.5.5 0 0 1 .512.12"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              viewBox="0 0 14 14"
+              class="shrink-0 rotate-90"
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M1.25 7a5.75 5.75 0 1 1 11.5 0a5.75 5.75 0 0 1-11.5 0M7 0a7 7 0 1 0 0 14A7 7 0 0 0 7 0m2.854 4.146a.5.5 0 0 1 .12.512l-2 6a.5.5 0 0 1-.903.1L5.636 8.363L3.243 6.93a.5.5 0 0 1 .099-.903l6-2a.5.5 0 0 1 .512.12"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              viewBox="0 0 14 14"
+              class="shrink-0 rotate-180"
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M1.25 7a5.75 5.75 0 1 1 11.5 0a5.75 5.75 0 0 1-11.5 0M7 0a7 7 0 1 0 0 14A7 7 0 0 0 7 0m2.854 4.146a.5.5 0 0 1 .12.512l-2 6a.5.5 0 0 1-.903.1L5.636 8.363L3.243 6.93a.5.5 0 0 1 .099-.903l6-2a.5.5 0 0 1 .512.12"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
         </div>
       </div>
     </div>
-    <div class="flex flex-col gap-4 text-primary-content">
-      <p class="text-secondary-content">feels like</p>
-      <p>18<span>°</span></p>
-      <p>20<span>°</span></p>
-      <p>10<span>°</span></p>
-      <p>08<span>°</span></p>
-    </div>
-    <div class="flex flex-col gap-4 text-primary-content">
-      <p class="text-secondary-content">humidity</p>
-      <p>45<span>%</span></p>
-      <p>49<span>%</span></p>
-      <p>52<span>%</span></p>
-      <p>30<span>%</span></p>
-    </div>
-    <div class="flex flex-col gap-4 text-primary-content">
-      <p class="text-secondary-content">pressure, mmhg</p>
-      <p>1500</p>
-      <p>1485</p>
-      <p>1492</p>
-      <p>1443</p>
-    </div>
-    <div class="flex flex-col gap-4 text-primary-content">
-      <p class="text-secondary-content">visibility, km</p>
-      <p>10</p>
-      <p>5</p>
-      <p>2</p>
-      <p>3</p>
-    </div>
-    <div class="flex flex-col gap-4 text-primary-content">
-      <p class="text-secondary-content">cloudiness</p>
-      <p>51<span>%</span></p>
-      <p>55<span>%</span></p>
-      <p>61<span>%</span></p>
-      <p>49<span>%</span></p>
-    </div>
-    <div class="flex flex-col gap-4 text-primary-content">
-      <p class="text-secondary-content">wind, m/s</p>
-      <div class="flex flex-row gap-4">
-        <div class="flex flex-col gap-4">
-          <p>51<span>%</span></p>
-          <p>55<span>%</span></p>
-          <p>61<span>%</span></p>
-          <p>49<span>%</span></p>
-        </div>
-        <div class="flex flex-col gap-4 text-secondary-content">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="23"
-            height="23"
-            viewBox="0 0 14 14"
-            class="shrink-0"
-          >
-            <path
-              fill="currentColor"
-              fill-rule="evenodd"
-              d="M1.25 7a5.75 5.75 0 1 1 11.5 0a5.75 5.75 0 0 1-11.5 0M7 0a7 7 0 1 0 0 14A7 7 0 0 0 7 0m2.854 4.146a.5.5 0 0 1 .12.512l-2 6a.5.5 0 0 1-.903.1L5.636 8.363L3.243 6.93a.5.5 0 0 1 .099-.903l6-2a.5.5 0 0 1 .512.12"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="23"
-            height="23"
-            viewBox="0 0 14 14"
-            class="shrink-0 rotate-45"
-          >
-            <path
-              fill="currentColor"
-              fill-rule="evenodd"
-              d="M1.25 7a5.75 5.75 0 1 1 11.5 0a5.75 5.75 0 0 1-11.5 0M7 0a7 7 0 1 0 0 14A7 7 0 0 0 7 0m2.854 4.146a.5.5 0 0 1 .12.512l-2 6a.5.5 0 0 1-.903.1L5.636 8.363L3.243 6.93a.5.5 0 0 1 .099-.903l6-2a.5.5 0 0 1 .512.12"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="23"
-            height="23"
-            viewBox="0 0 14 14"
-            class="shrink-0 rotate-90"
-          >
-            <path
-              fill="currentColor"
-              fill-rule="evenodd"
-              d="M1.25 7a5.75 5.75 0 1 1 11.5 0a5.75 5.75 0 0 1-11.5 0M7 0a7 7 0 1 0 0 14A7 7 0 0 0 7 0m2.854 4.146a.5.5 0 0 1 .12.512l-2 6a.5.5 0 0 1-.903.1L5.636 8.363L3.243 6.93a.5.5 0 0 1 .099-.903l6-2a.5.5 0 0 1 .512.12"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="23"
-            height="23"
-            viewBox="0 0 14 14"
-            class="shrink-0 rotate-180"
-          >
-            <path
-              fill="currentColor"
-              fill-rule="evenodd"
-              d="M1.25 7a5.75 5.75 0 1 1 11.5 0a5.75 5.75 0 0 1-11.5 0M7 0a7 7 0 1 0 0 14A7 7 0 0 0 7 0m2.854 4.146a.5.5 0 0 1 .12.512l-2 6a.5.5 0 0 1-.903.1L5.636 8.363L3.243 6.93a.5.5 0 0 1 .099-.903l6-2a.5.5 0 0 1 .512.12"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  </a>
+  }
+</div>
