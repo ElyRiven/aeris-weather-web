@@ -2,11 +2,15 @@ import { Wind } from './api-weather-response.interface';
 
 export interface FiveDaysForecast {
   cnt: number;
+  days: ForecastList[];
+}
+
+export interface ForecastList {
+  date: string;
   list: Forecast[];
 }
 
 export interface Forecast {
-  date: string;
   time: string;
   description: string;
   temp: number;
