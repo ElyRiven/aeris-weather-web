@@ -6,15 +6,18 @@
   >
     <!-- FORECAST GRID -->
     <div
-      class="grid grid-cols-8 items-center justify-center gap-13 mx-18 my-9 text-secondary-content"
+      class="grid items-center justify-center gap-4 m-4 text-secondary-content grid-cols-3 sm:mx-12 sm:my-6 md:mx-14 md:my-7 md:gap-7 md:grid-cols-4 lg:mx-18 lg:my-9 lg:gap-10 lg:grid-cols-7 xl:gap-13 xl:grid-cols-8"
     >
       <div class="flex flex-col col-span-2 justify-start gap-4">
         <!-- HEADER -->
-        <p class="text-primary-content font-bold">
+        <p class="hidden sm:block sm:text-primary-content sm:font-bold">
           {{ forecastItem.date | date : "EEEE, d MMMM" }}
         </p>
+        <p class="text-primary-content font-bold sm:hidden">
+          {{ forecastItem.date | date : "EEEE, d" }}
+        </p>
         <!-- CONTENT -->
-        <div class="flex flex-row gap-4">
+        <div class="flex flex-row gap-4 justify-between">
           <!-- DAYTIME -->
           <div class="flex flex-col justify-center gap-4">
             @if (hasDataForDayPart(forecastItem.list, "morning")) {
@@ -119,7 +122,7 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col gap-4 text-primary-content">
+      <div class="hidden lg:flex lg:flex-col lg:gap-4 lg:text-primary-content">
         <p class="text-secondary-content">feels like</p>
         @if (hasDataForDayPart(forecastItem.list, "morning")) {
         <p>
@@ -157,7 +160,7 @@
         </p>
         }
       </div>
-      <div class="flex flex-col gap-4 text-primary-content">
+      <div class="hidden md:flex md:flex-col md:gap-4 md:text-primary-content">
         <p class="text-secondary-content">humidity</p>
         @if (hasDataForDayPart(forecastItem.list, "morning")) {
         <p>
@@ -187,7 +190,7 @@
         </p>
         }
       </div>
-      <div class="flex flex-col gap-4 text-primary-content">
+      <div class="hidden xl:flex xl:flex-col xl:gap-4 xl:text-primary-content">
         <p class="text-secondary-content">pressure</p>
         @if (hasDataForDayPart(forecastItem.list, "morning")) {
         <p>
@@ -211,7 +214,7 @@
         <p>{{ getWeatherProperty(forecastItem.list, "pressure", "night") }}</p>
         }
       </div>
-      <div class="flex flex-col gap-4 text-primary-content">
+      <div class="hidden lg:flex lg:flex-col lg:gap-4 lg:text-primary-content">
         <p class="text-secondary-content">visibility</p>
         @if (hasDataForDayPart(forecastItem.list, "morning")) {
         <p>
@@ -257,7 +260,7 @@
         </p>
         }
       </div>
-      <div class="flex flex-col gap-4 text-primary-content">
+      <div class="hidden lg:flex lg:flex-col lg:gap-4 lg:text-primary-content">
         <p class="text-secondary-content">cloudiness</p>
         @if (hasDataForDayPart(forecastItem.list, "morning")) {
         <p>
@@ -287,8 +290,10 @@
         </p>
         }
       </div>
-      <div class="flex flex-col gap-4 text-primary-content">
-        <p class="text-secondary-content">wind, m/s</p>
+      <div
+        class="flex flex-col items-end md:items-start gap-4 text-primary-content"
+      >
+        <p class="block text-secondary-content">wind, m/s</p>
         <div class="flex flex-row gap-4">
           <div class="flex flex-col gap-4">
             @if (hasDataForDayPart(forecastItem.list, "morning")) {
