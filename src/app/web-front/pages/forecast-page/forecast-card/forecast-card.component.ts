@@ -1,15 +1,19 @@
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
 
 import type {
   FiveDaysForecast,
   Forecast,
 } from '@weather/interfaces/forecast.interface';
+import type { Wind } from '@weather/interfaces/api-weather-response.interface';
 import { TemperatureService } from '@shared/services/temperature.service';
-import { DatePipe } from '@angular/common';
+import { WeatherUtils } from '@weather/utils/weather-utils';
+import { VisibilityPipe } from '@weather/pipes/visibility.pipe';
+import { TemperaturePipe } from '@weather/pipes/temperature.pipe';
 
 @Component({
   selector: 'forecast-card',
-  imports: [DatePipe],
+  imports: [DatePipe, VisibilityPipe, DecimalPipe, TemperaturePipe],
   templateUrl: './forecast-card.component.html',
 })
 export class ForecastCardComponent {
@@ -40,5 +44,28 @@ export class ForecastCardComponent {
     if (!dayPartForecast) return undefined;
 
     return dayPartForecast[property];
+  }
+
+  getWindProperty<T extends keyof Wind>(
+    forecasts: Forecast[],
+    property: T,
+    dayPart: 'morning' | 'afternoon' | 'evening' | 'night'
+  ): number | undefined {
+    const wind = this.getWeatherProperty(forecasts, 'wind', dayPart);
+    if (!wind) return undefined;
+    return wind[property] as number;
+  }
+
+  hasDataForDayPart(
+    forecasts: Forecast[],
+    dayPart: 'morning' | 'afternoon' | 'evening' | 'night'
+  ): boolean {
+    return forecasts.some((f) => this.getDayPart(f.time) === dayPart);
+  }
+
+  getWindDirectionClass(degrees: number | undefined): string {
+    if (!degrees) return '';
+
+    return WeatherUtils.getWindDirectionClass(degrees);
   }
 }

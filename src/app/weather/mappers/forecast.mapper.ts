@@ -54,7 +54,7 @@ export class ForecastMapper {
       temp_max: forecast.main.temp_max,
       temp_min: forecast.main.temp_min,
       feels_like: forecast.main.feels_like,
-      icon: `${ICON_URL}/${forecast.weather[0].icon}@2x.png`,
+      icon: `${ICON_URL}/${forecast.weather[0].icon}.png`,
       humidity: forecast.main.humidity,
       pressure: forecast.main.pressure,
       visibility: forecast.visibility,

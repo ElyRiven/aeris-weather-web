@@ -31,6 +31,24 @@ export class WeatherUtils {
     return short ? shortDirArray[index] : longDirArray[index];
   }
 
+  static getWindDirectionClass(degrees: number | undefined): string {
+    if (!degrees) return '';
+
+    const WIND_DIRECTION_CLASSES = [
+      '-rotate-45',
+      'rotate-0',
+      'rotate-45',
+      'rotate-90',
+      'rotate-135',
+      'rotate-180',
+      '-rotate-135',
+      '-rotate-90',
+    ];
+    const index = Math.round(degrees / 45) % 8;
+
+    return WIND_DIRECTION_CLASSES[index];
+  }
+
   static getWeatherInsight(weather: Weather | undefined): string {
     if (!weather) return '';
 

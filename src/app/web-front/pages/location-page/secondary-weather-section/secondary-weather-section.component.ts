@@ -5,17 +5,7 @@ import type { Weather } from '@weather/interfaces/current-weather.interface';
 
 import { VisibilityPipe } from '@weather/pipes/visibility.pipe';
 import { WindDirectionPipe } from '@weather/pipes/wind-direction.pipe';
-
-const WIND_DIRECTION_CLASSES = [
-  '-rotate-45',
-  'rotate-0',
-  'rotate-45',
-  'rotate-90',
-  'rotate-135',
-  'rotate-180',
-  '-rotate-135',
-  '-rotate-90',
-];
+import { WeatherUtils } from '@weather/utils/weather-utils';
 
 @Component({
   selector: 'secondary-weather-section',
@@ -30,6 +20,6 @@ export class SecondaryWeatherSectionComponent {
 
     const index = Math.round(degrees / 45) % 8;
 
-    return WIND_DIRECTION_CLASSES[index];
+    return WeatherUtils.getWindDirectionClass(degrees);
   }
 }
