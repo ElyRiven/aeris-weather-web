@@ -69,31 +69,32 @@
     </button>
     @if ( isMenuOpen() ) {
     <div
-      class="absolute inset-0"
+      class="fixed inset-0"
       aria-hidden="true"
       (click)="isMenuOpen.set(false)"
     ></div>
     <div
       @menuAnimation
-      class="p-2 w-fit absolute top-17 right-1 bg-accent rounded-box md:hidden"
+      class="p-2 w-fit fixed top-17 right-4 bg-accent rounded-box z-50 md:hidden"
     >
       <div class="flex flex-col gap-2 items-center justify-center">
         <a
           routerLink="/location"
           routerLinkActive="btn-active"
           class="btn btn-accent w-full"
+          (click)="isMenuOpen.set(false)"
           >Current Weather</a
         >
         <a
           routerLink="/forecast"
           routerLinkActive="btn-active"
           class="btn btn-accent w-full"
+          (click)="isMenuOpen.set(false)"
           >5-day Forecast</a
         >
       </div>
     </div>
     }
-
     <!-- MOBILE MENU END -->
   </nav>
 </header>

@@ -1,5 +1,5 @@
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Component, signal } from '@angular/core';
+import { Component, signal, HostListener } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
@@ -47,4 +47,11 @@ import { trigger, transition, style, animate } from '@angular/animations';
 })
 export class FrontNavbarComponent {
   public isMenuOpen = signal(false);
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    if (this.isMenuOpen()) {
+      this.isMenuOpen.set(false);
+    }
+  }
 }
