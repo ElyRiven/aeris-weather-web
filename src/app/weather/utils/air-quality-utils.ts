@@ -26,9 +26,16 @@ export class AirQualityUtils {
 
     if (!ranges) return '';
 
-    for (let i = 0; i < ranges.length; i++)
-      return value <= ranges[i] ? categories[i] : '';
+    if (value > ranges[ranges.length - 1]) {
+      return categories[categories.length - 1];
+    }
 
-    return categories[ranges.length];
+    for (let i = 0; i < ranges.length; i++) {
+      if (value <= ranges[i]) {
+        return categories[i];
+      }
+    }
+
+    return categories[categories.length - 1];
   }
 }
