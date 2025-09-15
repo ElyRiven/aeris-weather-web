@@ -1,11 +1,15 @@
 import { TitleCasePipe } from '@angular/common';
-import { Component, input, signal } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 
 import type { UserLocation } from '@front/interfaces/location.interface';
 import type { Weather } from '@weather/interfaces/current-weather.interface';
 
 import { TemperaturePipe } from '@weather/pipes/temperature.pipe';
 import { TimePipe } from '@weather/pipes/time.pipe';
+
+import { TemperatureSelectorComponent } from '@shared/components/temperature-selector/temperature-selector.component';
+
+import { TemperatureService } from '@shared/services/temperature.service';
 
 const SUNNY_CONDITIONS = ['haze', 'dust', 'sand', 'ash'];
 
@@ -22,19 +26,23 @@ const RAINY_CONDITIONS = [
 
 @Component({
   selector: 'main-weather-section',
-  imports: [TemperaturePipe, TitleCasePipe, TimePipe],
+  imports: [
+    TemperaturePipe,
+    TitleCasePipe,
+    TimePipe,
+    TemperatureSelectorComponent,
+  ],
   templateUrl: './main-weather-section.component.html',
 })
 export class MainWeatherSectionComponent {
-  public temperatureUnit = signal<'c' | 'f'>('c');
+  #temperatureService = inject(TemperatureService);
+
+  temperatureUnit() {
+    return this.#temperatureService.currentUnit();
+  }
 
   public currentLocation = input<UserLocation | undefined>(undefined);
   public currentWeather = input<Weather | undefined>(undefined);
-
-  toggleUnit(event: Event): void {
-    const tempInput = event.target as HTMLInputElement;
-    this.temperatureUnit.set(tempInput.checked ? 'f' : 'c');
-  }
 
   getBackgroundGradientClass(mainWeather: string | undefined): string {
     if (!mainWeather) return '';

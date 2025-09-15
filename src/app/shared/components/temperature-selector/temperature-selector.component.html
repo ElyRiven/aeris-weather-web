@@ -11,6 +11,7 @@
     <input
       type="checkbox"
       class="toggle toggle-sm sm:toggle-md lg:toggle-lg checked:bg-transparent text-primary-content"
+      [checked]="temperatureUnit() === 'f'"
       (change)="toggleUnit($event)"
     />
     <span

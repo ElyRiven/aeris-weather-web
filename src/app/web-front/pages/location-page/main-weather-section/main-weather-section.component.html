@@ -5,27 +5,9 @@
   [class]="getBackgroundGradientClass(currentWeather()?.mainWeather)"
 >
   <!-- TEMPERATURE SELECTOR -->
-  <div class="relative transition-all">
-    <div
-      class="flex flex-row w-fit sm:items-center sm:justify-center gap-[10px] relative sm:absolute left-4"
-    >
-      <span
-        [class]="{ 'text-secondary-content/50': temperatureUnit() === 'f' }"
-        class="font-semibold text-base sm:text-lg md:text-xl"
-        >ºC</span
-      >
-      <input
-        type="checkbox"
-        class="toggle toggle-sm sm:toggle-md lg:toggle-lg checked:bg-transparent text-primary-content"
-        (change)="toggleUnit($event)"
-      />
-      <span
-        [class]="{ 'text-secondary-content/50': temperatureUnit() === 'c' }"
-        class="font-semibold text-base sm:text-lg md:text-xl"
-        >ºF</span
-      >
-    </div>
-  </div>
+
+  <temperature-selector />
+
   <!-- MAIN WEATHER CARD -->
   <div
     class="flex flex-col md:flex-row items-center md:items-end justify-center gap-5 md:gap-[35px] lg:gap-[50px] mx-auto w-fit transition-all"
