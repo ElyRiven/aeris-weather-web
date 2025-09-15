@@ -4,6 +4,7 @@ import { LocationPageComponent } from './pages/location-page/location-page.compo
 import { ForecastPageComponent } from './pages/forecast-page/forecast-page.component';
 import { WebFrontLayoutComponent } from './layouts/web-front-layout/web-front-layout.component';
 import { MissingLocationGuard } from '@shared/guards/missing-location.guard';
+import { DetailsPageComponent } from './pages/details-page/details-page.component';
 
 export const WebFrontRoutes: Routes = [
   {
@@ -16,8 +17,17 @@ export const WebFrontRoutes: Routes = [
       },
       {
         path: 'forecast',
-        component: ForecastPageComponent,
-        canMatch: [MissingLocationGuard],
+        children: [
+          {
+            path: '',
+            component: ForecastPageComponent,
+            canMatch: [MissingLocationGuard],
+          },
+          {
+            path: 'details',
+            component: DetailsPageComponent,
+          },
+        ],
       },
       {
         path: '**',
