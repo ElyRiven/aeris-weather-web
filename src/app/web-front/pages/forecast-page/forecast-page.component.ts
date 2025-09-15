@@ -1,13 +1,16 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
+
 import { tap } from 'rxjs/operators';
 
 import type { UserLocation } from '@front/interfaces/location.interface';
 import type { FiveDaysForecast } from '@weather/interfaces/forecast.interface';
-import { TitleSectionComponent } from './title-section/title-section.component';
-import { ForecastCardComponent } from './forecast-card/forecast-card.component';
+
 import { GeolocationService } from '@geolocation/services/geolocation.service';
 import { ForecastService } from '@weather/services/forecast-weather.service';
+
+import { ForecastCardComponent } from './forecast-card/forecast-card.component';
+import { TitleSectionComponent } from '@front/components/title-section/title-section.component';
 
 @Component({
   selector: 'forecast-page',
