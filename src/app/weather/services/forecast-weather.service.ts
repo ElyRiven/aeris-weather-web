@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 
 import { Observable, catchError, map, throwError } from 'rxjs';
 
@@ -15,6 +15,7 @@ const WEATHER_API_KEY = environment.openweatherkey;
 @Injectable({ providedIn: 'root' })
 export class ForecastService {
   #http = inject(HttpClient);
+  #selectedDay = signal<string>('5 days');
 
   getFiveDayForecast(lat: number, lon: number): Observable<FiveDaysForecast> {
     return this.#http
@@ -41,5 +42,13 @@ export class ForecastService {
           );
         })
       );
+  }
+
+  currentSelectedDay(): string {
+    return this.#selectedDay();
+  }
+
+  setSelectedDay(selectedDay: string) {
+    this.#selectedDay.set(selectedDay);
   }
 }

@@ -145,4 +145,13 @@ export class GeolocationService {
       this.#preciseLocation.set(preciseLocation);
     });
   });
+
+  getCurrentLocation(): UserLocation {
+    const defaultLocation = this.defaultLocationValue();
+    const preciseLocation = this.preciseLocationValue();
+
+    if (!preciseLocation) return defaultLocation!;
+
+    return preciseLocation;
+  }
 }

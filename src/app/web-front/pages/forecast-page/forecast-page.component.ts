@@ -24,12 +24,11 @@ export class ForecastPageComponent {
   public forecast = signal<FiveDaysForecast | undefined>(undefined);
 
   currentLocation(): UserLocation {
-    const defaultLocation = this.#geolocationService.defaultLocationValue();
-    const preciseLocation = this.#geolocationService.preciseLocationValue();
+    return this.#geolocationService.getCurrentLocation();
+  }
 
-    if (!preciseLocation) return defaultLocation!;
-
-    return preciseLocation;
+  currentDay(): string {
+    return this.#forecastService.currentSelectedDay();
   }
 
   forecastRx = rxResource({
