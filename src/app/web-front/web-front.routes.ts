@@ -24,7 +24,7 @@ export const WebFrontRoutes: Routes = [
             canMatch: [MissingLocationGuard],
           },
           {
-            path: 'details',
+            path: 'details/:date',
             component: DetailsPageComponent,
           },
         ],

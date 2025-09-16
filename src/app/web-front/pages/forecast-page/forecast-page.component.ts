@@ -27,10 +27,6 @@ export class ForecastPageComponent {
     return this.#geolocationService.getCurrentLocation();
   }
 
-  currentDay(): string {
-    return this.#forecastService.currentSelectedDay();
-  }
-
   forecastRx = rxResource({
     request: () => ({
       location: this.currentLocation(),

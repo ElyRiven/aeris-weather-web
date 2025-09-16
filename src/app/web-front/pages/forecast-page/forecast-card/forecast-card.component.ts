@@ -29,10 +29,6 @@ export class ForecastCardComponent {
     return this.#temperatureService.currentUnit();
   }
 
-  saveSelectedDay(selectedDay: string) {
-    this.#forecastService.setSelectedDay(selectedDay);
-  }
-
   getDayPart(time: string): 'morning' | 'afternoon' | 'evening' | 'night' {
     const hour = parseInt(time.split(':')[0]);
     if (hour >= 6 && hour < 12) return 'morning';
