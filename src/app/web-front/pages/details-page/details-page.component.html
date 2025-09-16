@@ -4,5 +4,11 @@
     [selectedDate]="date()"
   />
 
-  <div>{{ selectedForecast() | json }}</div>
+  <div
+    class="grid grid-cols-1 lg:grid lg:grid-cols-2 xl:flex xl:flex-row items-center justify-center gap-2"
+  >
+    @for (hourForecast of selectedForecast()?.list; track $index) {
+    <details-card [hourForecast]="hourForecast" />
+    }
+  </div>
 </div>

@@ -12,6 +12,7 @@ export interface ForecastList {
 
 export interface Forecast {
   time: string;
+  full_date: string;
   description: string;
   temp: number;
   temp_min: number;

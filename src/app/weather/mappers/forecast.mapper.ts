@@ -49,6 +49,7 @@ export class ForecastMapper {
 
     return {
       time,
+      full_date: forecast.dt_txt,
       description: forecast.weather[0].description,
       temp: forecast.main.temp,
       temp_max: forecast.main.temp_max,

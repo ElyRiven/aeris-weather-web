@@ -1,0 +1,66 @@
+<div
+  class="xl:w-28 p-3 md:py-3 lg:px-2 xl:py-5 bg-accent border border-secondary-content/50 rounded-box transition-all ease-in-out"
+>
+  <!-- LARGE CARDS -->
+  <div
+    class="hidden xl:flex xl:flex-col xl:items-center xl:justify-center xl:gap-[10px]"
+  >
+    <div class="flex flex-row gap-[10px]">
+      <div class="font-semibold text-2xl">
+        {{ hourForecast().temp | temperature : temperatureUnit() }}°
+      </div>
+      <div class="size-fit">
+        <img
+          class="size-8"
+          [src]="hourForecast().icon"
+          [alt]="`${hourForecast().description} icon`"
+        />
+      </div>
+    </div>
+    <div class="flex flex-row gap-[10px] text-secondary-content text-sm">
+      <p>feels like</p>
+      <div>
+        {{ hourForecast().feels_like | temperature : temperatureUnit() }}°
+      </div>
+    </div>
+    <p
+      class="flex h-10 items-center justify-center text-sm font-semibold text-center"
+    >
+      {{ hourForecast().description | titlecase }}
+    </p>
+    <div class="text-sm font-semibold">
+      {{ hourForecast().full_date | date : "h a" | lowercase }}
+    </div>
+  </div>
+  <!-- SMALL CARDS -->
+  <div class="flex flex-row justify-between items-center xl:hidden">
+    <div class="flex flex-row gap-[10px]">
+      <div class="font-semibold text-2xl">
+        {{ hourForecast().temp | temperature : temperatureUnit() }}°
+      </div>
+      <div class="size-fit">
+        <img
+          class="size-8"
+          [src]="hourForecast().icon"
+          [alt]="`${hourForecast().description} icon`"
+        />
+      </div>
+    </div>
+    <div
+      class="hidden md:flex md:flex-row md:gap-[10px] md:text-secondary-content md:text-sm"
+    >
+      <p>feels like</p>
+      <div>
+        {{ hourForecast().feels_like | temperature : temperatureUnit() }}°
+      </div>
+    </div>
+    <p
+      class="flex h-10 items-center justify-center text-sm font-semibold text-center"
+    >
+      {{ hourForecast().description | titlecase }}
+    </p>
+    <div class="text-sm font-semibold">
+      {{ hourForecast().full_date | date : "h a" | lowercase }}
+    </div>
+  </div>
+</div>
