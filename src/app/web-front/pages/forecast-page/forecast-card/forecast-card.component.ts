@@ -1,17 +1,21 @@
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
 
 import type {
   FiveDaysForecast,
   Forecast,
+  ForecastList,
 } from '@weather/interfaces/forecast.interface';
 import type { Wind } from '@weather/interfaces/api-weather-response.interface';
+
 import { ForecastService } from '@weather/services/forecast-weather.service';
 import { TemperatureService } from '@shared/services/temperature.service';
-import { WeatherUtils } from '@weather/utils/weather-utils';
+
 import { VisibilityPipe } from '@weather/pipes/visibility.pipe';
 import { TemperaturePipe } from '@weather/pipes/temperature.pipe';
+
+import { WeatherUtils } from '@weather/utils/weather-utils';
 
 @Component({
   selector: 'forecast-card',
@@ -21,12 +25,15 @@ import { TemperaturePipe } from '@weather/pipes/temperature.pipe';
 export class ForecastCardComponent {
   #temperatureService = inject(TemperatureService);
   #forecastService = inject(ForecastService);
-  #router = inject(Router);
 
   public forecast = input<FiveDaysForecast>();
 
   temperatureUnit() {
     return this.#temperatureService.currentUnit();
+  }
+
+  setSelectedForecast(forecast: ForecastList) {
+    this.#forecastService.setSelectedForecast(forecast);
   }
 
   getDayPart(time: string): 'morning' | 'afternoon' | 'evening' | 'night' {

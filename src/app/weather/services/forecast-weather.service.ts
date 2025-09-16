@@ -3,10 +3,15 @@ import { inject, Injectable, signal } from '@angular/core';
 
 import { Observable, catchError, map, throwError } from 'rxjs';
 
-import type { FiveDaysForecast } from '@weather/interfaces/forecast.interface';
-import { environment } from 'src/environments/environment';
-import { APIForecastResponse } from '@weather/interfaces/api-forecast-response.interface';
+import type {
+  FiveDaysForecast,
+  ForecastList,
+} from '@weather/interfaces/forecast.interface';
+import type { APIForecastResponse } from '@weather/interfaces/api-forecast-response.interface';
+
 import { ForecastMapper } from '@weather/mappers/forecast.mapper';
+
+import { environment } from 'src/environments/environment';
 
 const FORECAST_API_URL = 'https://api.openweathermap.org/data';
 const API_VERSION = '2.5';
@@ -15,6 +20,7 @@ const WEATHER_API_KEY = environment.openweatherkey;
 @Injectable({ providedIn: 'root' })
 export class ForecastService {
   #http = inject(HttpClient);
+  #selectedForecast = signal<ForecastList | undefined>(undefined);
 
   getFiveDayForecast(lat: number, lon: number): Observable<FiveDaysForecast> {
     return this.#http
@@ -41,5 +47,15 @@ export class ForecastService {
           );
         })
       );
+  }
+
+  getSelectedForecast(): ForecastList | undefined {
+    if (!this.#selectedForecast()) return;
+
+    return this.#selectedForecast()!;
+  }
+
+  setSelectedForecast(forecast: ForecastList) {
+    this.#selectedForecast.set(forecast);
   }
 }
