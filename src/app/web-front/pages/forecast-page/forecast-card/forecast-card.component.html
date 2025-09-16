@@ -2,8 +2,12 @@
   @for (forecastItem of forecast()?.days; track $index; let even = $even ) {
   <a
     [routerLink]=" `/forecast/details/${forecastItem.date}` "
-    class="block w-full h-fit border border-secondary-content/50 rounded-box cursor-pointer"
-    [class]="even ? 'bg-secondary' : 'bg-accent'"
+    class="block w-full h-fit border border-secondary-content/50 rounded-box cursor-pointer transition-all ease-in-out"
+    [class]="
+      even
+        ? 'bg-secondary md:hover:bg-secondary/75'
+        : 'bg-accent md:hover:bg-accent/75'
+    "
   >
     <!-- FORECAST GRID -->
     <div
