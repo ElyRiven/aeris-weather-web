@@ -13,10 +13,15 @@ import { TitleSectionComponent } from '@front/components/title-section/title-sec
 import { GeolocationService } from '@geolocation/services/geolocation.service';
 import { ForecastService } from '@weather/services/forecast-weather.service';
 import { DetailsCardComponent } from './details-card/details-card.component';
+import { ForecastChartComponent } from './forecast-chart/forecast-chart.component';
 
 @Component({
   selector: 'details-page',
-  imports: [TitleSectionComponent, DetailsCardComponent],
+  imports: [
+    TitleSectionComponent,
+    DetailsCardComponent,
+    ForecastChartComponent,
+  ],
   templateUrl: './details-page.component.html',
 })
 export class DetailsPageComponent {
