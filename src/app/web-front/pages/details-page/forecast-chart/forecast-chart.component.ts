@@ -40,23 +40,6 @@ export class ForecastChartComponent implements AfterViewInit {
     new Chart(canvas, {
       type,
       data,
-      // {
-      //   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      //   datasets: [
-      //     {
-      //       label: '# of Votes',
-      //       data: [12, 19, 3, 5, 2, 3],
-      //       borderWidth: 1,
-      //       pointRadius: 6,
-      //     },
-      //     {
-      //       label: 'Second chart',
-      //       data: [5, 9, 30, 2, 1, 7],
-      //       borderWidth: 1,
-      //       pointRadius: 6,
-      //     },
-      //   ],
-      // },
       options: {
         responsive: true,
         scales: {
@@ -68,9 +51,9 @@ export class ForecastChartComponent implements AfterViewInit {
           },
           x: {
             //* HIDES TICKS IN THE X AXIS (TEXT LABELS OF EACH POINT IN THE X AXIS)
-            // ticks: {
-            //   display: false,
-            // },
+            ticks: {
+              display: false,
+            },
             grid: {
               display: false,
             },

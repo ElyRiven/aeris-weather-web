@@ -55,7 +55,15 @@ export class DetailsPageComponent {
   private updateChartsData(forecast: ForecastList): void {
     const chartType: string = forecast.list.length < 2 ? 'bar' : 'line';
 
-    const labels = forecast.list.map((item) => item.time);
+    const labels = forecast.list.map((item) => {
+      const hour = parseInt(item.time.slice(0, 2));
+
+      if (hour === 0) return '12 am';
+      if (hour === 12) return '12 pm';
+
+      return hour > 12 ? `${hour - 12} pm` : `${hour} am`;
+    });
+
     const windSpeed = forecast.list.map((item) => item.wind.speed);
     const pressure = forecast.list.map((item) => item.pressure);
     const visibility = forecast.list.map((item) => item.visibility);
