@@ -6,14 +6,17 @@
   />
 
   <div
-    class="grid grid-cols-1 lg:grid lg:grid-cols-2 xl:flex xl:flex-row items-center justify-center gap-2"
+    class="grid grid-cols-1 lg:grid xl:flex xl:flex-row items-center justify-center gap-2"
+    [class]="
+      selectedForecast()!.list.length > 1 ? 'lg:grid-cols-2' : 'lg:grid-cols-1'
+    "
   >
     @for (hourForecast of selectedForecast()?.list; track $index) {
     <details-card [hourForecast]="hourForecast" />
     }
   </div>
 
-  <div class="grid size-full grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
+  <div class="grid size-full grid-cols-1 lg:grid-cols-2 gap-5 mt-5 sm:mt-0">
     <forecast-chart [forecastData]="windChartData()" />
     <forecast-chart [forecastData]="pressureChartData()" />
     <forecast-chart [forecastData]="CloudsHumidityChartData()" />

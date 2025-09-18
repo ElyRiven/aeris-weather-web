@@ -66,7 +66,9 @@ export class DetailsPageComponent {
 
     const windSpeed = forecast.list.map((item) => item.wind.speed);
     const pressure = forecast.list.map((item) => item.pressure);
-    const visibility = forecast.list.map((item) => item.visibility);
+    const visibility = forecast.list.map((item) =>
+      Number((item.visibility / 1000).toFixed(1))
+    );
 
     const clouds = forecast.list.map((item) => item.clouds);
     const humidity = forecast.list.map((item) => item.humidity);
