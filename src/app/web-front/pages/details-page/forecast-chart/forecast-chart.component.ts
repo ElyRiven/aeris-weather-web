@@ -42,6 +42,7 @@ export class ForecastChartComponent implements AfterViewInit {
       data,
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
           y: {
             beginAtZero: true,
