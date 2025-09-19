@@ -43,15 +43,73 @@ import { trigger, transition, style, animate } from '@angular/animations';
         ),
       ]),
     ]),
+    trigger('searchAnimation', [
+      transition(':enter', [
+        style({
+          transform: 'translateY(-1000px)',
+          filter: 'blur(40px)',
+          transformOrigin: '50% 0%',
+
+          opacity: 0,
+        }),
+        animate(
+          '0.25s cubic-bezier(0.250, 0.460, 0.450, 0.940)',
+          style({
+            transform: 'translateY(0)',
+            filter: 'blur(0)',
+            transformOrigin: '50% 50%',
+
+            opacity: 1,
+          })
+        ),
+      ]),
+      transition(':leave', [
+        style({
+          transform: 'translateY(0)',
+          filter: 'blur(0)',
+          transformOrigin: '50% 50%',
+
+          opacity: 1,
+        }),
+        animate(
+          '0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940)',
+          style({
+            transform: 'translateY(-1000px)',
+            filter: 'blur(40px)',
+            transformOrigin: '50% 0%',
+
+            opacity: 0,
+          })
+        ),
+      ]),
+    ]),
   ],
 })
 export class FrontNavbarComponent {
   public isMenuOpen = signal(false);
+  public isSearchOpen = signal(false);
 
-  @HostListener('window:scroll')
-  onWindowScroll() {
+  public searchQuery = signal<string | undefined>(undefined);
+
+  onSearch(query: string) {
+    this.searchQuery.set(query);
+
+    console.log('text', query);
+    console.log('signal', this.searchQuery());
+  }
+
+  closeAllMenus(): void {
     if (this.isMenuOpen()) {
       this.isMenuOpen.set(false);
     }
+
+    if (this.isSearchOpen()) {
+      this.isSearchOpen.set(false);
+    }
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    this.closeAllMenus();
   }
 }

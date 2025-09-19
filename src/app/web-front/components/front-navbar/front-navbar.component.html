@@ -1,4 +1,4 @@
-<header class="w-full h-fit bg-primary py-4 font-jost font-semibold">
+<header class="w-full h-fit bg-primary py-4 font-jost font-semibold z-5">
   <nav
     class="md:w-180 lg:w-250 xl:w-310 flex flex-row gap-4 items-center mx-1 md:mx-auto transition-all"
   >
@@ -18,7 +18,7 @@
       class="hidden md:btn md:btn-accent"
       >5-day Forecast</a
     >
-    <form class="flex-grow">
+    <form class="flex-grow relative" (click)="isSearchOpen.set(true)">
       <label class="input input-accent bg-base-100 w-full">
         <svg
           class="h-[1em] opacity-50"
@@ -40,14 +40,107 @@
           class="text-center placeholder:text-center"
           type="search"
           placeholder="Search"
+          (keydown)="onSearch(searchBar.value)"
+          #searchBar
         />
       </label>
+      <!-- Resultados de búsqueda -->
+      @if ( isSearchOpen() ) {
+      <div class="absolute w-full left-0 top-13 z-4" @searchAnimation>
+        <div
+          class="border border-secondary-content/50 bg-accent rounded-box shadow-lg max-h-60 overflow-y-auto"
+        >
+          @if ( true ) {
+          <ul class="menu menu-md p-2 w-full">
+            <li>
+              <a
+                class="flex flex-row justify-between text-primary-content w-full"
+              >
+                <div class="flex flex-row gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-map-pin-icon lucide-map-pin"
+                  >
+                    <path
+                      d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+                    />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  <span>Resultado 1</span>
+                </div>
+                <span class="text-secondary-content">Localizacion 1</span>
+              </a>
+            </li>
+            <li class="flex flex-row">
+              <a class="text-primary-content w-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-map-pin-icon lucide-map-pin"
+                >
+                  <path
+                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+                  />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <p>Resultado 2</p>
+              </a>
+            </li>
+            <li class="flex flex-row">
+              <a class="text-primary-content w-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-map-pin-icon lucide-map-pin"
+                >
+                  <path
+                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+                  />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <p>Resultado 3</p>
+              </a>
+            </li>
+          </ul>
+          }
+          <!--  -->
+          @else {
+          <div class="menu menu-md p-2">
+            <p>Current: [Location]</p>
+          </div>
+          }
+        </div>
+      </div>
+      }
     </form>
+
     <!-- TABLET/DESKTOP NAVBAR END -->
 
     <!-- MOBILE MENU START -->
     <button
-      class="bg-accent p-2 rounded-full active:bg-base-200/50 md:hidden"
+      class="bg-accent p-2 rounded-full active:bg-base-200/50 z-40 md:hidden"
       (click)="isMenuOpen.set(!isMenuOpen())"
     >
       <svg
@@ -67,12 +160,13 @@
         <path d="M4 6h16" />
       </svg>
     </button>
-    @if ( isMenuOpen() ) {
+    @if ( isMenuOpen() || isSearchOpen() ) {
     <div
-      class="fixed inset-0"
+      class="fixed inset-0 z-3"
       aria-hidden="true"
-      (click)="isMenuOpen.set(false)"
+      (click)="closeAllMenus()"
     ></div>
+    } @if ( isMenuOpen() ) {
     <div
       @menuAnimation
       class="p-2 w-fit fixed top-17 right-4 bg-accent rounded-box z-50 md:hidden"
