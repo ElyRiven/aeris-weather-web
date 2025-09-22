@@ -50,7 +50,7 @@ export class GeolocationService {
   getCurrentLocation(): UserLocation {
     const defaultLocation = this.defaultLocationValue();
     const preciseLocation = this.preciseLocationValue();
-    const selectedLocation = this.preciseLocationValue();
+    const selectedLocation = this.selectedLocationValue();
 
     if (selectedLocation) return selectedLocation;
 
