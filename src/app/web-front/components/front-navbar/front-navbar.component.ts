@@ -1,4 +1,4 @@
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import {
   Component,
   signal,
@@ -6,8 +6,12 @@ import {
   effect,
   linkedSignal,
   input,
+  inject,
 } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
+
+import type { UserLocation } from '@front/interfaces/location.interface';
+import { GeolocationService } from '@geolocation/services/geolocation.service';
 
 @Component({
   selector: 'front-navbar',
@@ -93,27 +97,47 @@ import { trigger, transition, style, animate } from '@angular/animations';
   ],
 })
 export class FrontNavbarComponent {
+  #geolocationService = inject(GeolocationService);
+  #router = inject(Router);
+
   public isMenuOpen = signal(false);
   public isSearchOpen = signal(false);
 
-  // TODO FETCH INITIAL VALUE FROM GEOLOCATION SERVICE (NOT AN INPUT)
-  public initialValue = input<string>('');
-
-  public searchQuery = linkedSignal<string>(() => this.initialValue() ?? '');
+  public inputString = signal<string>('');
+  public searchResult = linkedSignal<UserLocation[]>(() =>
+    this.#geolocationService.getSearchResult()
+  );
+  public currentLocation = linkedSignal<UserLocation>(() =>
+    this.#geolocationService.getCurrentLocation()
+  );
 
   debounceEffect = effect((onCleanup) => {
-    const value = this.searchQuery();
+    const value = this.inputString();
 
     const timeout = setTimeout(() => {
       if (!value) return;
 
-      console.log('Ejecutar búsqueda', value);
+      this.onSearch(value);
     }, 1000);
 
     onCleanup(() => {
       clearTimeout(timeout);
     });
   });
+
+  onSearch(input: string): void {
+    this.#geolocationService.setSearchQuery(input);
+  }
+
+  onSelection(selected: UserLocation): void {
+    this.#router.navigate(['/location'], {
+      queryParams: {
+        query: `${selected.location}-${selected.country}`,
+      },
+    });
+
+    this.#geolocationService.setSelectedLocation(selected);
+  }
 
   closeAllMenus(): void {
     if (this.isMenuOpen()) {

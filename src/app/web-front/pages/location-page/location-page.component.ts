@@ -14,6 +14,7 @@ import { MainWeatherSectionComponent } from './main-weather-section/main-weather
 import { SecondaryWeatherSectionComponent } from './secondary-weather-section/secondary-weather-section.component';
 import { AirQualitySectionComponent } from './air-quality-section/air-quality-section.component';
 import { WeatherInsightSectionComponent } from './weather-insight-section/weather-insight-section.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'location-page',
@@ -29,8 +30,11 @@ export class LocationPageComponent {
   #geolocationService = inject(GeolocationService);
   #weatherService = inject(CurrentWeatherService);
   #airService = inject(AirQualityService);
+  #activatedRoute = inject(ActivatedRoute);
 
   public currentWeather = signal<CurrentWeather | undefined>(undefined);
+  public queryParam =
+    this.#activatedRoute.snapshot.queryParamMap.get('query') ?? '';
 
   defaultWeatherEffect = effect(() => {
     const defaultLocation = this.#geolocationService.defaultLocationValue();
@@ -56,6 +60,24 @@ export class LocationPageComponent {
   compareLocationsEffect = effect(() => {
     const preciseLocation = this.#geolocationService.preciseLocationValue();
     const defaultLocation = this.#geolocationService.defaultLocationValue();
+    const selectedLocation = this.#geolocationService.selectedLocationValue();
+
+    if (selectedLocation) {
+      const { lat, lon } = selectedLocation;
+
+      forkJoin({
+        weather: this.#weatherService.getCurrentWeather(lat, lon),
+        air: this.#airService.getAirPollution(lat, lon),
+      }).subscribe(({ weather, air }) => {
+        const mappedWeather =
+          CurrentWeatherMapper.mapWeatherAirLocationToCurrentWeather(
+            weather,
+            air,
+            selectedLocation
+          );
+        this.currentWeather.set(mappedWeather);
+      });
+    }
 
     if (!preciseLocation || !defaultLocation) return;
 

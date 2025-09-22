@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { effect, inject, Injectable, signal } from '@angular/core';
 
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 
 import type {
   Coordinates,
@@ -21,8 +21,13 @@ const GEOLOCATION_API_KEY = environment.openweatherkey;
 @Injectable({ providedIn: 'root' })
 export class GeolocationService {
   #http = inject(HttpClient);
+
   #defaultLocation = signal<UserLocation | undefined>(undefined);
   #preciseLocation = signal<UserLocation | undefined>(undefined);
+  #selectedLocation = signal<UserLocation | undefined>(undefined);
+
+  #searchQuery = signal<string>('');
+  #searchResult = signal<UserLocation[]>([]);
 
   hasLocation(): boolean {
     if (this.#defaultLocation() || this.#preciseLocation()) return true;
@@ -38,10 +43,71 @@ export class GeolocationService {
     return this.#preciseLocation();
   }
 
+  selectedLocationValue(): UserLocation | undefined {
+    return this.#selectedLocation();
+  }
+
+  getCurrentLocation(): UserLocation {
+    const defaultLocation = this.defaultLocationValue();
+    const preciseLocation = this.preciseLocationValue();
+    const selectedLocation = this.preciseLocationValue();
+
+    if (selectedLocation) return selectedLocation;
+
+    if (!preciseLocation) return defaultLocation!;
+
+    return preciseLocation;
+  }
+
+  getSearchQuery(): string {
+    return this.#searchQuery();
+  }
+
+  setSearchQuery(query: string): void {
+    const cleanValue = query.trim().toLowerCase();
+
+    this.#searchQuery.set(cleanValue);
+  }
+
+  getSearchResult(): UserLocation[] {
+    return this.#searchResult();
+  }
+
+  setSelectedLocation(selectedLocation: UserLocation): void {
+    this.#selectedLocation.set(selectedLocation);
+  }
+
   // TODO: Implement Direct Geolocation Call
-  // getDirectGeolocation(query: string): Observable<UserLocation> {
-  //   return this.#http.get<GeolocationResponse[]>(`${GEOLOCATION_API_URL}/${API_VERSION}`)
-  // }
+  getDirectGeolocation(query: string): Observable<UserLocation[]> {
+    return this.#http
+      .get<GeolocationResponse[]>(
+        `${GEOLOCATION_API_URL}/${API_VERSION}/direct`,
+        {
+          params: {
+            q: query,
+            limit: 5,
+            appid: GEOLOCATION_API_KEY,
+          },
+        }
+      )
+      .pipe(
+        map((response) =>
+          GeolocationMapper.mapDirectGeolocationResponseToUserLocationArray(
+            response
+          )
+        ),
+        catchError((error) => {
+          console.error('Error fetching direct geolocation', error);
+
+          return throwError(
+            () =>
+              new Error(
+                `Could not get direct geolocation for the given query ${query}`
+              )
+          );
+        })
+      );
+  }
 
   // * OpenWeather Reverse Geolocation Call
   getReverseGeolocation(lat: number, lon: number): Observable<UserLocation> {
@@ -125,12 +191,29 @@ export class GeolocationService {
     loader: () => this.getPreciseGeolocation(),
   });
 
+  searchResultRx = rxResource({
+    request: () => ({ query: this.#searchQuery() }),
+    loader: ({ request }) => {
+      if (!request.query) return of([]);
+
+      return this.getDirectGeolocation(request.query);
+    },
+  });
+
   defaultLocationAssignemtEffect = effect(() => {
     const defaultLocation = this.defaultGeolocationRx.value();
 
     if (!defaultLocation) return;
 
     this.#defaultLocation.set(defaultLocation);
+  });
+
+  searchResultAssignemtEffect = effect(() => {
+    const searchResult = this.searchResultRx.value();
+
+    if (!searchResult) return;
+
+    this.#searchResult.set(searchResult);
   });
 
   preciseLocationAssignemtEffect = effect(() => {
@@ -145,13 +228,4 @@ export class GeolocationService {
       this.#preciseLocation.set(preciseLocation);
     });
   });
-
-  getCurrentLocation(): UserLocation {
-    const defaultLocation = this.defaultLocationValue();
-    const preciseLocation = this.preciseLocationValue();
-
-    if (!preciseLocation) return defaultLocation!;
-
-    return preciseLocation;
-  }
 }

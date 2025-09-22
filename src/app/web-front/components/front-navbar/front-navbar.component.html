@@ -24,7 +24,7 @@
       class="hidden md:btn md:btn-accent"
       >5-day Forecast</a
     >
-    <div class="flex-grow relative" (click)="isSearchOpen.set(true)">
+    <div class="flex-grow relative z-4" (click)="isSearchOpen.set(true)">
       <label class="input input-accent bg-base-100 w-full">
         <svg
           class="h-[1em] opacity-50"
@@ -46,24 +46,26 @@
           type="search"
           class="text-center placeholder:text-center"
           placeholder="Search"
-          [value]="searchQuery()"
-          (keyup)="searchQuery.set(searchBar.value)"
+          (keyup)="inputString.set(searchBar.value)"
+          (keyup.enter)="onSearch(searchBar.value)"
           #searchBar
         />
       </label>
       <!-- Resultados de búsqueda -->
       @if ( isSearchOpen() ) {
-      <div class="absolute w-full left-0 top-13 z-4" @searchAnimation>
+      <div class="absolute w-full left-0 top-13" @searchAnimation>
         <div
-          class="border border-secondary-content/50 bg-accent rounded-box shadow-lg max-h-60 overflow-y-auto"
+          class="border border-secondary-content/50 bg-accent rounded-box shadow-lg max-h-60 overflow-y-auto textce"
         >
-          @if ( true ) {
+          @if ( searchResult() ) {
           <ul class="menu menu-md p-2 w-full">
+            @for (result of searchResult(); track $index) {
             <li>
               <a
                 class="flex flex-row justify-between text-primary-content w-full"
+                (click)="onSelection(result)"
               >
-                <div class="flex flex-row gap-2">
+                <div class="flex flex-row items-center gap-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -74,69 +76,37 @@
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="lucide lucide-map-pin-icon lucide-map-pin"
+                    class="lucide lucide-map-pin-icon lucide-map-pin shrink-0"
                   >
                     <path
                       d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
                     />
                     <circle cx="12" cy="10" r="3" />
                   </svg>
-                  <span>Resultado 1</span>
+                  <p>
+                    <span>{{ result.location }}</span>
+                    @if ( result.state ) {
+                    <span>, {{ result.state }}</span>
+                    }
+                  </p>
                 </div>
-                <span class="text-secondary-content">Localizacion 1</span>
+                <span class="text-secondary-content">{{ result.country }}</span>
               </a>
             </li>
-            <li class="flex flex-row">
-              <a class="text-primary-content w-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="lucide lucide-map-pin-icon lucide-map-pin"
-                >
-                  <path
-                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
-                  />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                <p>Resultado 2</p>
-              </a>
-            </li>
-            <li class="flex flex-row">
-              <a class="text-primary-content w-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="lucide lucide-map-pin-icon lucide-map-pin"
-                >
-                  <path
-                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
-                  />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                <p>Resultado 3</p>
-              </a>
-            </li>
+            }
+            <!--  -->
+            @empty {
+            <div class="menu menu-md p-2 w-full">
+              <p class="flex flex-row items-center justify-between">
+                <span class="font-normal"> Current Location </span>
+                <span>
+                  {{ currentLocation().location }},
+                  {{ currentLocation().country }}
+                </span>
+              </p>
+            </div>
+            }
           </ul>
-          }
-          <!--  -->
-          @else {
-          <div class="menu menu-md p-2">
-            <p>Current: [Location]</p>
-          </div>
           }
         </div>
       </div>

@@ -18,6 +18,20 @@ export class GeolocationMapper {
     };
   }
 
+  static mapDirectGeolocationResponseToUserLocationArray(
+    geolocationResponse: GeolocationResponse[]
+  ): UserLocation[] {
+    return geolocationResponse.map((geolocation) => {
+      return {
+        location: geolocation.name,
+        country: geolocation.country,
+        state: geolocation.state,
+        lat: geolocation.lat,
+        lon: geolocation.lon,
+      };
+    });
+  }
+
   // * IpAPI Mapper
   static mapDefaultGeolocationToUserLocation(
     geolocation: DefaultGeolocation
