@@ -1,9 +1,15 @@
-<header class="w-full h-fit bg-primary py-4 font-jost font-semibold z-5">
+<header
+  class="w-full h-fit bg-primary py-4 font-jost font-semibold z-5 transition-all ease-in-out duration-10000"
+>
   <nav
-    class="md:w-180 lg:w-250 xl:w-310 flex flex-row gap-4 items-center mx-1 md:mx-auto transition-all"
+    class="md:w-180 lg:w-250 xl:w-310 flex flex-row gap-4 items-center mx-1 md:mx-auto"
   >
     <!-- TABLET/DESKTOP NAVBAR START -->
-    <a href="">
+    <a
+      [class]="isSearchOpen() ? 'hidden' : 'block'"
+      class="md:block"
+      routerLink="/location"
+    >
       <img src="/assets/images/aeris-title.png" alt="Aeris Web Title" />
     </a>
     <a
@@ -18,7 +24,7 @@
       class="hidden md:btn md:btn-accent"
       >5-day Forecast</a
     >
-    <form class="flex-grow relative" (click)="isSearchOpen.set(true)">
+    <div class="flex-grow relative" (click)="isSearchOpen.set(true)">
       <label class="input input-accent bg-base-100 w-full">
         <svg
           class="h-[1em] opacity-50"
@@ -37,10 +43,11 @@
           </g>
         </svg>
         <input
-          class="text-center placeholder:text-center"
           type="search"
+          class="text-center placeholder:text-center"
           placeholder="Search"
-          (keydown)="onSearch(searchBar.value)"
+          [value]="searchQuery()"
+          (keyup)="searchQuery.set(searchBar.value)"
           #searchBar
         />
       </label>
@@ -134,13 +141,14 @@
         </div>
       </div>
       }
-    </form>
+    </div>
 
     <!-- TABLET/DESKTOP NAVBAR END -->
 
     <!-- MOBILE MENU START -->
     <button
       class="bg-accent p-2 rounded-full active:bg-base-200/50 z-40 md:hidden"
+      [class]="isSearchOpen() ? 'hidden' : 'block'"
       (click)="isMenuOpen.set(!isMenuOpen())"
     >
       <svg

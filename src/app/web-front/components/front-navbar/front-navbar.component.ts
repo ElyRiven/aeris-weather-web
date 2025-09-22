@@ -1,5 +1,12 @@
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Component, signal, HostListener } from '@angular/core';
+import {
+  Component,
+  signal,
+  HostListener,
+  effect,
+  linkedSignal,
+  input,
+} from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
@@ -89,14 +96,24 @@ export class FrontNavbarComponent {
   public isMenuOpen = signal(false);
   public isSearchOpen = signal(false);
 
-  public searchQuery = signal<string | undefined>(undefined);
+  // TODO FETCH INITIAL VALUE FROM GEOLOCATION SERVICE (NOT AN INPUT)
+  public initialValue = input<string>('');
 
-  onSearch(query: string) {
-    this.searchQuery.set(query);
+  public searchQuery = linkedSignal<string>(() => this.initialValue() ?? '');
 
-    console.log('text', query);
-    console.log('signal', this.searchQuery());
-  }
+  debounceEffect = effect((onCleanup) => {
+    const value = this.searchQuery();
+
+    const timeout = setTimeout(() => {
+      if (!value) return;
+
+      console.log('Ejecutar búsqueda', value);
+    }, 1000);
+
+    onCleanup(() => {
+      clearTimeout(timeout);
+    });
+  });
 
   closeAllMenus(): void {
     if (this.isMenuOpen()) {
