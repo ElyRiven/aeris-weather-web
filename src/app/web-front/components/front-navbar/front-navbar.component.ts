@@ -130,13 +130,13 @@ export class FrontNavbarComponent {
   }
 
   onSelection(selected: UserLocation): void {
+    this.#geolocationService.setSelectedLocation(selected);
+
     this.#router.navigate(['/location'], {
       queryParams: {
         query: `${selected.location}-${selected.country}`,
       },
     });
-
-    this.#geolocationService.setSelectedLocation(selected);
   }
 
   closeAllMenus(): void {
