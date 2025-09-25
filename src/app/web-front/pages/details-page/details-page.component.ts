@@ -53,7 +53,7 @@ export class DetailsPageComponent {
   }
 
   private updateChartsData(forecast: ForecastList): void {
-    const chartType: string = forecast.list.length < 2 ? 'bar' : 'line';
+    const chartType: string = forecast.list.length < 4 ? 'bar' : 'line';
 
     const labels = forecast.list.map((item) => {
       const hour = parseInt(item.time.slice(0, 2));

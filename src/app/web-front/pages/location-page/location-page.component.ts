@@ -38,6 +38,24 @@ export class LocationPageComponent {
 
   defaultWeatherEffect = effect(() => {
     const defaultLocation = this.#geolocationService.defaultLocationValue();
+    const selectedLocation = this.#geolocationService.selectedLocationValue();
+
+    if (selectedLocation) {
+      const { lat, lon } = selectedLocation;
+
+      forkJoin({
+        weather: this.#weatherService.getCurrentWeather(lat, lon),
+        air: this.#airService.getAirPollution(lat, lon),
+      }).subscribe(({ weather, air }) => {
+        const mappedWeather =
+          CurrentWeatherMapper.mapWeatherAirLocationToCurrentWeather(
+            weather,
+            air,
+            selectedLocation
+          );
+        this.currentWeather.set(mappedWeather);
+      });
+    }
 
     if (!defaultLocation) return;
 
