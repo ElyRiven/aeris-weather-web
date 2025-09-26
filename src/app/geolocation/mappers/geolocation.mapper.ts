@@ -38,10 +38,10 @@ export class GeolocationMapper {
   ): UserLocation {
     return {
       location: geolocation.city,
-      country: geolocation.countryCode,
-      state: geolocation.regionName,
-      lat: geolocation.lat,
-      lon: geolocation.lon,
+      country: geolocation.country_code,
+      state: geolocation.region,
+      lat: geolocation.latitude,
+      lon: geolocation.longitude,
     };
   }
 }
