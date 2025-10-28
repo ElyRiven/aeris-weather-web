@@ -1,59 +1,72 @@
-# AerisWeatherWeb
+<h1 align="center">Aeris - Weather Web Page</h1>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
+<div align="center">
+  <a href="https://aeris-weather.netlify.app/" target="_blank">
+    <img width="305" height="110" src="./public/assets/images/aeris-title-large.png" alt="aeris-title" />
+  </a>
+</div>
 
-## Development server
+<br>
 
-To start a local development server, run:
+## Description
 
-```bash
-ng serve
-```
+Aeris Weather is an open-source webpage dedicated to provide accurate weather and forecast.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Our clean, modern and user-friendly web offer a visual appealing experience for check weather information anywhere worldwide.
 
-## Code scaffolding
+**[✨ Check the website here](https://aeris-weather.netlify.app/)**
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Web Content
 
-```bash
-ng generate component component-name
-```
+#### 🌤️ Current Weather
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Check temperature, humidity, wind metrics and aditional information about the weather of your current location. Explore the air quality, pollutants, composition of the air and weather insight based on measured weather conditions.
 
-```bash
-ng generate --help
-```
+<div align="center">
+  <img style="border-radius:4%;" src="./public/assets/images/tablet-two-screens-main-mock.png" alt="main-page-mock" width="50%" />
+</div>
 
-## Building
+#### 🌦️ 5 Day Weather Forecast
 
-To build the project run:
+Get a comprehensive look at the weather for the next 5 days. This includes daily high and low temperatures, and a summary of the expected weather conditions, helping you plan your week ahead.
 
-```bash
-ng build
-```
+<div align="center">
+  <img style="border-radius:4%;" src="./public/assets/images/tablet-forecast-mock.png" alt="forecast-page-mock" width="50%" />
+</div>
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+#### 🖋️ 3 Hours Forecast Details
 
-## Running unit tests
+Dive into the specifics with a detailed forecast broken down into 3-hour intervals for the selected forecast for the day. Track changes in temperature, wind speed, cloudiness, humidity and more through intuitive, easy-to-read charts.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+<div align="center">
+  <img style="border-radius:4%;" src="./public/assets/images/tablet-two-screens-details-mock.png" alt="details-page-mock" width="50%" />
+</div>
 
-```bash
-ng test
-```
+#### 📱 Adaptive Interface
 
-## Running end-to-end tests
+Aeris features a fully responsive design that looks and works great on any screen size. Enjoy a seamless weather-checking experience whether you're on a desktop, tablet, or mobile device.
 
-For end-to-end (e2e) testing, run:
+<div align="center">
+  <img style="border-radius:4%;" src="./public/assets/images/mobile-three-screens-mock.png" alt="details-page-mock" width="50%" />
+</div>
 
-```bash
-ng e2e
-```
+## 💻 Tech Stack
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- [![Angular][angular-badge]][angular-url] - A component-based framework for building scalable web applications
+- [![Tailwind][tailwind-badge]][tailwind-url] - A utility-first CSS framework for rapidly building custom designs.
 
-## Additional Resources
+- Weather data powered by **[Openweather](https://openweathermap.org/)**
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+<!-- Repository Links -->
+
+[angular-badge]: https://img.shields.io/badge/Angular-fff?style=for-the-badge&logo=angular&logoColor=fff&color=E82B69
+[tailwind-badge]: https://img.shields.io/badge/Tailwind-fff?style=for-the-badge&logo=tailwindcss&logoColor=fff&color=00bcff
+
+<!-- Repository Links -->
+
+<!-- Tech Stack Links -->
+
+[angular-url]: https://v19.angular.dev/
+[tailwind-url]: https://tailwindcss.com/
+
+<!-- Tech Stack Links -->
